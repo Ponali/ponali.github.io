@@ -1,0 +1,32 @@
+<!DOCTYPE html><html><head>
+		<meta charset="utf-8">
+		<title>JSArt</title>
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/theme.css" rel="stylesheet">
+		<script src="js/main.js"></script>
+   	<script src="js/init.js"></script>
+		<script src="js/theme.js"></script>
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+		<link rel="manifest" href="/favicon/site.webmanifest">
+	</head>
+	<body>
+		<div id="options" class="hidden">
+			<label for="width">Width: <input id="width" type="number" value="256"></label>
+			<label for="height">Height: <input id="height" type="number" value="256"></label>
+			<label for="length-random" title="Chooses a random length between 1 and the specified length">Randomize length: <input id="length-random" type="checkbox" checked></label>
+			<label for="length" title="The amount of operands to include in the formula">Length: <input id="length" type="number" value="100"></label>
+			<label for="operand-ratio" title="The probability that a variable (i or t) would be used instead of a number as an operand">Operand ratio: <input id="operand-ratio" type="range" min="0" max="1" step="0.01" value="0.5"></label>
+			<label for="variable-ratio" title="The probability that i would be used over t">Variable ratio: <input id="variable-ratio" type="range" min="0" max="1" step="0.01" value="0.1"></label>
+			<label for="bracket-chance" title="The probability that an expression would be enclosed in brackets">Bracket probability: <input id="bracket-chance" type="range" min="0" max="1" step="0.01" value="0.5"></label>
+		</div>
+		<button id="advanced">Code Settings</button><button id="dark">Toggle Dark mode</button><span id="fps"></span>
+		<input id="formula" type="text">
+		<canvas id="canvas"></canvas>
+		<a href="/helper/index.html">Helper</a>
+		<div id="about"><b>About JSArt</b><br>JSArt is a JavaScript compiler to make Art out of JS code.<br>To ask any questions or put all your code to the JSArt compiler, join this discord server: https://discord.gg/MsAwA5qM<br><i>How does it work?</i><br>For each pixel, the code is ran. The code should output a number, so it can be converted to hexadecimal to choose what color to pick for that pixel.<br><i>Variables</i><br>Yeah. We can't just let the screen have a singular color, so we help you by making those variables you can use:<ul><li>"i" for Index (the number of pixels that are already rendered + 1)</li><li>"t" for Time (Number of frames passed)</li><li>"x" for pixel X (The X position of the pixel that is going to be rendered)</li><li>"y" for pixel Y (The Y position of the pixel that is going to be rendered)</li><li>"mx" for Mouse X</li><li>"my" for Mouse Y</li><li>"sw" for Screen Width</li><li>"sh" for Screen Height</li></ul>Now, try to play around!</div><br>
+		<div id="projects"></div>
+		<div id="popup" class="hidden"><span id="popupmsg"></span><button id="popupbtn">OK</button></div>
+	
+</body></html>

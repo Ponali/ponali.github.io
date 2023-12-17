@@ -1,0 +1,1 @@
+(()=>{ let a = (c*(((Math.sin(t/1000)+1)/4)+0.5)); let b = (Math.floor(Math.sin(((x+10000)*(y+1000))+(t/40000))*10)==0)*0xffffff; return (b ? b : a ); })()

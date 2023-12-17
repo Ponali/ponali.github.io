@@ -1,0 +1,1 @@
+{"id":"module-desc","name":"Module Describer","modded":false,"creator":"Ponali","desc":"This module easily describes any other module. Used in JSArt browser.","details":{"version":"1.0.0","output":{"type":"func","name":"decodeDoc","params":[{"name":"doc","desc":"Document (JSON/Object/{}): Module's description file (ends with .json)"}]}}}

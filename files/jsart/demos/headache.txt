@@ -1,0 +1,1 @@
+(()=>{ vx=x+Math.sin(((x/50)+((y/40)*Math.sin((x+y)/100))+(t/1000)))*400; vy=y+Math.sin(((y/50)+(t/1000)))*400; let b = ((Math.sin((vx/40))*Math.cos(vy/40))+1)*128; let g = (Math.cos((((y>(28+(Math.random()*200)))?vx:x)+(10*Math.sin((y/(10+(Math.sin(t/500)*5)))+(t/50))))/10)+1)*128; let r = ic; return Math.floor(b)+(Math.floor(g)*256)+(Math.floor(r)*65536); })()

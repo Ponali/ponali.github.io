@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Image to JSArt Raw Data</title>
+	</head>
+	<body>
+		<h1>Image to JSArt Raw Data</h1>
+		<input type="file" id="image" name="image" accept="image/png, image/jpeg" onchange="onFileSelected(event)">
+		<button id="start">Start process</button>
+		<textarea id="rdata"></textarea>
+		<p id="done"></p>
+		<p>Set to fixed size: <input type="number" min="0" max="256" id="ipxw" />px width and <input type="number" min="0" max="256" id="ipxh" />px height</p>
+		<br><p>To make this work, you'll have to do something like this: <code>(()=>{ let data = [raw data given by converter];return data[(x)+(y*[image width])];  })();</code><br>You can put it inside a function called texture() and maybe adding a x and y parameter if needed.<br>Made by Ponali, 2023</p>
+		<script>
+			let img = new Image();
+			function onFileSelected(event) {
+				var selectedFile = event.target.files[0];
+				var reader = new FileReader();
+
+				img.title = selectedFile.name;
+
+				reader.onload = function(event) {
+					img.src = event.target.result;
+				};
+
+				reader.readAsDataURL(selectedFile);
+			}
+			document.querySelector("button#start").addEventListener("click",()=>{
+				let canvas = document.createElement("canvas");
+				//canvas.width = img.width;
+				//canvas.height = img.height;
+				canvas.width = document.querySelector("#ipxw").value;
+				canvas.height = document.querySelector("#ipxh").value;
+				let ctx = canvas.getContext("2d");
+				ctx.drawImage(img,0,0,canvas.width,canvas.height);
+				document.body.appendChild(canvas);
+				let data = (ctx.getImageData(0, 0, canvas.width, canvas.height)).data;
+				let i = 0;
+				//let a = setInterval(()=>{
+				let darray = [];
+				let cachearray = [];
+					//for(b=0;b<1000;b++){
+					data.forEach(((as)=>{
+						i++;
+						//let ch = String.fromCharCode(data[i]+35);
+						cachearray.push(as)
+						//document.querySelector("textarea#rdata").value+=ch;
+						if(i<12){console.log(cachearray);console.log(as)}
+						if(cachearray.length==4){darray.push(cachearray[2]+(cachearray[1]*256)+(cachearray[0]*65536));cachearray = [];}
+					//}
+					}))
+				
+					document.querySelector("textarea#rdata").value="["+darray.join(",")+"]";
+					//document.querySelector("p#done").innerHTML=Math.floor((i/data.length)*10000)/100+"% done"
+				
+				//},10)
+			})
+		</script>
+	</body>
+</html>

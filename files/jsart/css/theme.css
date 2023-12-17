@@ -1,0 +1,11 @@
+.dark{
+	background-color:black;
+	color:white;
+}
+.dark *:not(font, font *){
+	background-color:#404040 !important;
+	color:white !important;
+}
+#projects{
+	background-color:#d0d0d0;
+}

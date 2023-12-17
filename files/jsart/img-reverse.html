@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JSArt Raw Data to Image</title>
+	</head>
+	<body>
+		<style>canvas{border:2px solid black;}</style>
+		<h1>JSArt Raw Data to Image (reverse)</h1>
+		<textarea id="rdata"></textarea>
+		<button id="start">Start process</button>
+		<p id="done"></p>
+		<p>Set image to size: <input type="number" min="0" max="256" id="ipxw" />px width and <input type="number" min="0" max="256" id="ipxh" />px height</p>
+		<br><p>To make this work, you will have to output the data that was outputted by index.html or a sequence of numbers (any number like 0xff or 255 will work) in an array. After that, click "Start Process!" button, wait for an image (canvas) to show up and right click and save as image.<br>Made by Ponali, 2023</p>
+		<script>
+			document.querySelector("button#start").addEventListener("click",()=>{
+				if(document.querySelector("canvas#outputCanvas")){document.querySelector("canvas#outputCanvas").outerHTML="";}
+				let canvas = document.createElement("canvas");
+				canvas.setAttribute("id","outputCanvas");
+				//canvas.width = img.width;
+				//canvas.height = img.height;
+				canvas.width = document.querySelector("#ipxw").value;
+				canvas.height = document.querySelector("#ipxh").value;
+				let ctx = canvas.getContext("2d");
+				document.body.appendChild(canvas);
+				let rwd = document.querySelector("textarea#rdata").value;
+				let rwdj = JSON.parse(rwd);
+				for(i=0;i<rwdj.length;i++){
+					let hex = (rwdj[i]+0).toString(16);
+					hex="0".repeat(6-hex.length)+hex;
+					ctx.fillStyle="#"+hex;
+					ctx.fillRect((i%canvas.width),Math.floor(i/canvas.width),1,1)
+				}
+			})
+		</script>
+	</body>
+</html>
