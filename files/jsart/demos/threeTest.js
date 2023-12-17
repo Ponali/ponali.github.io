@@ -1,5 +1,5 @@
 (()=>{
-  if(x+y==0){if(!window.threeTest){window.threeTest={};fetch("https://threejs-demo.nhowe.repl.co/three.min.js").then(data=>data.text()).then(body=>{console.log("fetch correct!");(new Function(body))();init()});};if(window.THREE){window.threeTest.animate()}else{console.log("Waiting initialisation to end...")};}
+  if(x+y==0){if(!window.threeTest){window.threeTest={};fetch("https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js").then(data=>data.text()).then(body=>{console.log("fetch correct!");(new Function(body))();init()});};if(window.THREE){window.threeTest.animate()}else{console.log("Waiting initialisation to end...")};}
     function createWorld() {
     console.log("Creating world...");
         window.threeTest.scene = new THREE.Scene();
