@@ -5,10 +5,10 @@
 	}
 	if(x==0&&y==0){console.log("x "+Math.floor(mx)+" y "+Math.floor(my));
 		if(!window.pluto){
-			fetch("https://jsart.ponali.repl.co/modules/txt-small.txt").then(data=>data.text()).then(body=>{
+			fetch("https://ponali.github.io/files/jsart/modules/txt-small.txt").then(data=>data.text()).then(body=>{
 				window.pluto.boot.progress++;window.pluto.fetched.text=(new Function("i","t","x","y","mx","my","sw","sh","c","ic","cl","k",body));
 			});
-			fetch("https://jsart.ponali.repl.co/demos/pluto-icons.png").then(data=>data.blob()).then(body=>{
+			fetch("https://ponali.github.io/files/jsart/demos/pluto-icons.png").then(data=>data.blob()).then(body=>{
 				window.pluto.boot.progress++;
 				window.pluto.fetched.iconsPNG=URL.createObjectURL(body);
 				let imge = document.createElement("img");

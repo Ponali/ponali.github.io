@@ -44,7 +44,7 @@
 			k = window.dream.screenCapture[0].k;
 		}
 	}
-	let out = (()=>{ x=Math.floor((x/sw)*256);y=Math.floor((y/sh)*256);mx=(mx/sw)*256;my=(my/sh)*256;sw=256;sh=256; if(x==0&&y==0){if(!window.dftchr){(()=>{ fetch("https://jsart.ponali.repl.co/demos/browser.js").then(data=>data.text()).then((body)=>{window.dftchr.func= new Function("i","t","x","y","mx","my","sw","sh","c","ic","cl","k","return "+body);}) })();window.dftchr={"func":(()=>{return 255;})};}} return window.dftchr.func(i,t,x,y,mx,my,sw,sh,c,ic,cl,k); })();
+	let out = (()=>{ x=Math.floor((x/sw)*256);y=Math.floor((y/sh)*256);mx=(mx/sw)*256;my=(my/sh)*256;sw=256;sh=256; if(x==0&&y==0){if(!window.dftchr){(()=>{ fetch("https://ponali.github.io/files/jsart/demos/browser.js").then(data=>data.text()).then((body)=>{window.dftchr.func= new Function("i","t","x","y","mx","my","sw","sh","c","ic","cl","k","return "+body);}) })();window.dftchr={"func":(()=>{return 255;})};}} return window.dftchr.func(i,t,x,y,mx,my,sw,sh,c,ic,cl,k); })();
 	/*if(window.dream.interval>180){
 		window.dream.screenCapture[window.dream.screenCapture.length-1].data.push(out);
 		let screen = window.dream.screenCapture[window.dream.screenCapture.length-100];

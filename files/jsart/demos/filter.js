@@ -6,7 +6,7 @@
     window.filterVRam=[];
     for(i=0;i<65536;i++){
 		let out=0;
-		out=((i,t,x,y,mx,my,sw,sh,c,ic,cl,k)=>{ x=Math.floor((x/sw)*256);y=Math.floor((y/sh)*256);mx=(mx/sw)*256;my=(my/sh)*256;sw=256;sh=256; if(x==0&&y==0){if(!window.ftftchr){(()=>{ fetch("https://jsart.ponali.repl.co/demos/browser.js").then(data=>data.text()).then((body)=>{window.ftftchr.func= new Function("i","t","x","y","mx","my","sw","sh","c","ic","cl","k","return "+body);}) })();window.ftftchr={"func":(()=>{return 255;})};}} return window.ftftchr.func(i,t,x,y,mx,my,sw,sh,c,ic,cl,k); })(i,t,(i%sw),Math.floor(i/sw),mx,my,sw,sh,c,ic,cl,k);
+		out=((i,t,x,y,mx,my,sw,sh,c,ic,cl,k)=>{ x=Math.floor((x/sw)*256);y=Math.floor((y/sh)*256);mx=(mx/sw)*256;my=(my/sh)*256;sw=256;sh=256; if(x==0&&y==0){if(!window.ftftchr){(()=>{ fetch("https://ponali.github.io/files/jsart/demos/browser.js").then(data=>data.text()).then((body)=>{window.ftftchr.func= new Function("i","t","x","y","mx","my","sw","sh","c","ic","cl","k","return "+body);}) })();window.ftftchr={"func":(()=>{return 255;})};}} return window.ftftchr.func(i,t,x,y,mx,my,sw,sh,c,ic,cl,k); })(i,t,(i%sw),Math.floor(i/sw),mx,my,sw,sh,c,ic,cl,k);
 		window.filterVRam.push(out);
     }
 	

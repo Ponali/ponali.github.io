@@ -45,10 +45,10 @@
 			window.notepad.displayedText=ct;
 		}else{
 			window.notepad={"currentText":"Welcome to Notepad for JSArt!","displayedText":[],"fetched":{},"textMode":0,"capsLock":false,"shift":false,"keyLength":0};
-			fetch("https://jsart.ponali.repl.co/modules/txt-small.txt").then(data=>data.text()).then(body=>{
+			fetch("https://ponali.github.io/files/jsart/modules/txt-small.txt").then(data=>data.text()).then(body=>{
 				window.notepad.fetched.textSm=(new Function("i","t","x","y","mx","my","sw","sh","c","ic","cl","k",body));
 			});
-			fetch("https://jsart.ponali.repl.co/modules/txt-engine.txt").then(data=>data.text()).then(body=>{
+			fetch("https://ponali.github.io/files/jsart/modules/txt-engine.txt").then(data=>data.text()).then(body=>{
 				window.notepad.fetched.text=(new Function("i","t","x","y","mx","my","sw","sh","c","ic","cl","k",body));
 			});
 		}
