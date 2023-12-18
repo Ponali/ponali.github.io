@@ -41,7 +41,7 @@ function run(){
 		document.querySelector("#popup").innerHTML="";
 	}
 
-	popup({display:0,title:"Welcome",description:"We have updated the UI and rewritten all the code to make a much more modern look to the website. If you prefer the old look, click <a href='/old'>here</a>."})
+	popup({display:0,title:"Welcome",description:"We have updated the UI and rewritten all the code to make a much more modern look to the website. If you prefer the old look, click <a href='old/index.html'>here</a>."})
 }
 
 window.onload=run;
