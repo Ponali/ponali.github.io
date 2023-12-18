@@ -1,6 +1,6 @@
 function run(){
 	let exprs = document.querySelector("#experiments");
-	fetch("/experiments.json").then(data=>data.text()).then((body)=>{
+	fetch("experiments.json").then(data=>data.text()).then((body)=>{
 		try{
 		exprs.innerHTML="";
 		let json = JSON.parse(body);
@@ -9,11 +9,11 @@ function run(){
 				let elem = document.createElement("div");
 				let item = json[i];
 				elem.setAttribute("class","expr-box");
-				if(item.type=="project"){item.img="/examples/project.png"}
+				if(item.type=="project"){item.img="examples/project.png"}
 				if(item.img){elem.setAttribute("style",`background:url("${item.img}"); background-size:cover;`)}
 				elem.innerHTML=`<div class="expr-hvname"><span>${item.name}</span></div>`;
 				let requirements = "You need a(n) "+(item.type=="css" ? "CSS injector" : (item.type=="js" ? "JS Injector" : (item.type=="project" ? "working scratch client" : "[unknown]") ) );
-				let code = (item.type=="css" ? `Use the code <pre>@import url("https://scratchexperimentation.ponali.repl.co${item.code}");</pre> to launch the experiment.` : (item.type=="js" ? `Use the code <pre>fetch("https://scratchexperimentation.ponali.repl.co${item.code}").then(d=>d.text()).then(b=>eval(b));</pre> to launch the experiment.` : (item.type=="project" ? `Use the link <a href='https://turbowarp.org/${item.projectId}'>here</a> to run the project.` : "[unknown]") ) );
+				let code = (item.type=="css" ? `Use the code <pre>@import url("https://ponali.github.io/files/scratch-exp/${item.code}");</pre> to launch the experiment.` : (item.type=="js" ? `Use the code <pre>fetch("https://ponali.github.io/files/scratch-exp/${item.code}").then(d=>d.text()).then(b=>eval(b));</pre> to launch the experiment.` : (item.type=="project" ? `Use the link <a href='https://turbowarp.org/${item.projectId}'>here</a> to run the project.` : "[unknown]") ) );
 				elem.addEventListener("click",(()=>{popup({display:1,title:item.name,description:item.how+"<br><span class='popup-title'>Requirements</span>"+requirements+"<br>"+code});}),false)
 				exprs.appendChild(elem);
 			}
