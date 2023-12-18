@@ -1,0 +1,87 @@
+body{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	border:none;
+	width:100vw;
+	height:100vh;
+	background-color:#ffab1960;
+}
+center#header{
+	font-size: 30px;
+	background-color:#eee; /* E */
+}
+center#header a{
+	font-size: 20px;
+}
+
+.experiment{
+  margin: 10px;
+	width:250px;
+	min-height:110px;
+	padding-bottom:15px;
+	background-color:lightgray;
+	text-align: center;
+	font-style: italic;
+	float:left;
+	transition: background 0.4s, box-shadow 0.4s;
+	box-shadow: black 5px 5px 5px;
+}
+
+.experiment:hover{
+	background-color:white;
+	box-shadow: black 10px 10px 10px;
+}
+
+.experiment:active{
+	margin-top: 12px;
+	margin-bottom: 8px;
+}
+
+.experiment small{
+	font-style: normal;
+}
+
+.inactive{
+	display:none;
+	width:0px;
+	height:0px;
+	opacity:0;
+	margin:0;
+	padding:0;
+	border:none;
+	float:left;
+}
+
+#popup{
+	background-color: #00000080;
+	float: left;
+	position: fixed;
+	top:0px;
+	left:0px;
+	width:100vw;
+	height:100vh;
+	margin:0px;
+	padding:0px;
+	border:none;
+}
+
+#popupmsg{
+	background-color:white;
+	width:240px;
+	height:180px;
+	top:calc( (100vh - 180px) / 2 );
+	left:calc( (100vw - 240px) / 2 );
+	position:fixed;
+	text-align: center;
+}
+
+#popupmsg div{
+  height: 135px;
+  overflow-y: auto;
+}
+
+img{
+	image-rendering: pixelated;
+}
