@@ -1,0 +1,69 @@
+Movie challenge -- Nome da musica -- Explanation + Behind the Scenes -- https://scratch.mit.edu/projects/945562454/
+
+Behind the Scenes:
+
+I first downloaded the original project and opened it on TurboWarp Desktop.
+Then, since i found out that the pen block didn't use RGB colors, but only Scratch colors, i changed the block to be RGB colors instead. (RGB: https://en.wikipedia.org/wiki/RGB_color_model) (There is an explanation on how i did that, go to the "1 line challenge" original project and find a comment talking about changing the "pen color" block to different types.)
+
+While i was making this project, i wasn't just focusing on the "set pen color" block, but instead, i was using the "my variable" variable with multiple "add (value) to (my variable)" blocks.
+
+What helped me out is that Scratch is based off of JavaScript, meaning that i can do something like (<(timer) > 180> * 255) which would make the scene blue after 2 minutes, because of JavaScript's way of converting data from one type to another.
+
+I did some tranining before finding this project, with a project we made before called JSArt (Archived OG version: ponali.github.io/files/jsart/index.html) (Modded version: https://jsam.codersquack.nl/)
+
+
+Explanation:
+
+For every scene, i used something like (<<(timer) > start_time> and <(timer) < end_time>> * scene_code) so i can manage which scene needs to be rendered and which ones shouldn't, since i was using addition to merge all scenes.
+i also had to use ((timer) - start_time) instead of just (timer) for some scenes.
+
+To indicate all of those start and end times, i used a list with a bunch of those start and end values, sometimes inserting image data for some scenes.
+
+"0x" means the number is in hexadecimal (https://en.wikipedia.org/wiki/Hexadecimal). JavaScript converts that automatically into a decimal number when using decimal operators (+ - * /) with it.
+
+Scene 1 has 4 lines, first one is blue, second is green, third is red, and last is white.
+the first one was made using the (y position) variable and a little bit of tinkering since its boundaries aren't from 0 to 255, but -180 to 180.
+the second one used ((round (y value)) * 0x100) to go from blue to green and used (0 - (y position)) to reverse the y position.
+the third one used ((round (y value)) * 0x10000) to go from blue to red.
+the fourth one, however, used the x position and not the y position. i had to do some more tinkering to divide that to 4. i multiplied by 0x10101 for it to be white.
+
+Scene 2 is a label with the text "@Ponali". It wasn't through a text engine, i made an image with that text that only used two colors and used python with the "pillow" library ( https://pillow.readthedocs.io/en/stable/ ) to convert the image to raw data. 
+
+Scene 3 has a blue-ish background and two circles. one is big and moving down and the other is small and moving up. I used the mathematical formula ((x-cx)²+(y-cy)²)<d² (d=diameter, cx=circle x position, cy=circle y position) to calculate if a circle is in a certain pixel or not. on how i made a hole when both circles are on screen, that was made using an "Exclusive or (XOR)" operation ( https://en.wikipedia.org/wiki/Exclusive_or ) which i made with this operation: <(a + b) = 1>. i then multiplied that by 0xffff00 which makes it like a sun, because the hex color #ffff00 is yellow, and with the blue sky, the bottom becmes #ffffff, thus, white.
+
+Scene 4 is actually a random photo we got from lorem picsum (https://picsum.photos/) (i can't find the original image i used). and it has a sort of circle effect. i used the same circle formula i tried before, but i didn't use the < operator, but instead i added a timer to make it zoom, used (() mod (256)) so it doesn't go above 255, and multiplied it by 0x10101 for it to be shades of gray. i put it on top of the image's color for the current pixel which makes the effect.
+
+Scene 5 is a pink checkerboard pattern with a moving green background. i am unsure on how i made the checkerboard pattern, but the moving green background was made using sin() and cos() functions : i multiplied sin(x) with cos(y), multiplied the x and y value by another sin/cos function to change their size, made their boundaries from 0 to 255, rounded it, and multiplied by 0x100.
+
+Scene 6 has some yellow-ish stuff that scrolls down, that's actually the data in the list i'm using.
+
+Scene 7 is like if it's some kind of road. i actually copy-pasted something i did before and edited the sky a bit. go back to the start of this text file and go to jsart, then click on "Try" that's after the label "The wierd road seen through the invisible car window".
+
+Scene 8 i got that through some tinkering: (sqrt(abs(x*y))*("e^" of (sqrt(timer)*(timer/10))))
+
+Scene 9 is the same as scene 7, but the colors are reversed and the road is going the opposite way.
+
+Scene 10 is the same as scene 8, but the timer is not updated.
+
+Scene 11 is the same image as in scene 4, but with some kind of mosaic effect. i multiplied the x position by 2 and used modulo again for it to loop back, and i did the same for the y position. there is also a kind of rotating and scaling line in the background, which i got the formula from some tinkering: floor(abs(255-abs( ((x*1.3)*sin(timer*140))+((y*1.3)*sin(timer*75)) ))/3)*0x10101
+
+Scene 12 is the same as scene 11 but i used another image and, in the formula from before, i replaced 1.3 to 4
+
+Scene 13 uses the same image as scene 12 with a mosaic effect but doesn't scale up, and changes colors. i made this formula by tinkering to get random colors for every second: (((floor(timer)*5)+(((x>0)+3)*((y>0)+5)))*4.87)*65536
+
+Scene 14 is the same as scene 13, but the colors change much faster and the mosaic effect has multiplied by 2.
+
+Scene 15 are 2 lines, one is on the blue channel, and the other is the same, but on the green channel, rotated 90 degrees, but with some desyncs. I used the same formula for the rotating and scaling lines.
+
+Scene 16 is the same as scene 7 but the colors are multiplied by a sin function: value*(1+((sin(x+timer)/1024)*(timer/20)))
+
+Scene 17 uses a formula i got from tinkering: (sin((abs(x*y)*(((timer³)+2)/1000))+(timer*100))+1)*127.5
+
+Scene 18 is the same as scene 9, but the colors' values are divided by 2 and some japanese text. in the japanese text, the first line means "Insert key:" and the lines after that mean "Shutting down..."
+the text was made through an image, like scene 2.
+
+Scene 19 is the same code i used for random colors in scene 13, but edited to work on more than 4 colors, and with a change in the x and y positions using sin/cos functions
+
+Scene 20 this is a HUUUGE formula so i don't think i can put it in here, but it takes the circle effect from scene 4 and the road from scene 7 and amplifies them a LOT.
+
+Scene 21 uses a really small image with the text "end." multiplied by a sin function.
