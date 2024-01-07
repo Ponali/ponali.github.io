@@ -40,10 +40,10 @@ canvas {
 
 @font-face {
     font-family: 'Quicksand-Regular';
-    src:url('font/Quicksand-Regular.ttf.woff') format('woff'),
-        url('font/Quicksand-Regular.ttf.svg#Quicksand-Regular') format('svg'),
-        url('font/Quicksand-Regular.ttf.eot'),
-        url('font/Quicksand-Regular.ttf.eot?#iefix') format('embedded-opentype'); 
+    src:url('../font/Quicksand-Regular.ttf.woff') format('woff'),
+        url('../font/Quicksand-Regular.ttf.svg#Quicksand-Regular') format('svg'),
+        url('../font/Quicksand-Regular.ttf.eot'),
+        url('../font/Quicksand-Regular.ttf.eot?#iefix') format('embedded-opentype'); 
     font-weight: normal;
     font-style: normal;
 }
