@@ -1,5 +1,7 @@
-/* JSArt AppTools example */
 (()=>{if(x==0&&y==0){if(!window.aptf){(()=>{fetch("https://ponali.github.io/files/jsart/modules/appTools.js").then(data=>data.text()).then((body)=>{window.aptf.func= new Function("i","t","x","y","mx","my","sw","sh","c","ic","cl","k","return "+body);window.aptf.func();
+	
+	/* JSArt AppTools example
+	Created by @Ponali */
 
 	let txt, inputBef;
 	at.func.init=(()=>{
