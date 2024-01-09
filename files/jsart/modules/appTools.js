@@ -8,8 +8,8 @@ funcs.drawText=((text,x,y,width)=>{
 	if(!text){console.error("Text must be specified when using the drawText function. The text will not be drawn.");return null;};
 	window.at.c.tx.font = ([window.at.textSettings.style,window.at.textSettings.size.toString()+"px",window.at.textSettings.font]).filter((str)=>str!=='').join(" ");
 	let al=window.at.textSettings.align;
-	window.at.c.tx.textAlign = ((["l","left"]).includes(al)?"start":((["r","right"]).includes(al)?"end":((["c","middle"]).includes(al)?"center":al)));
-	let alX=((["l","left"]).includes(al)?0:((["r","right"]).includes(al)?255:((["c","middle"]).includes(al)?127:al)))
+	window.at.c.tx.textAlign = ((["l","left"]).includes(al)?"start":((["r","right"]).includes(al)?"end":((["c","middle","center"]).includes(al)?"center":al)));
+	let alX=((["l","left"]).includes(al)?0:((["r","right"]).includes(al)?255:((["c","middle","center"]).includes(al)?127:al)))
 	window.at.c.tx.fillText(text,x+alX,y+0,width);
 	if(!window.at.noStroke){window.at.c.tx.strokeText(text,x+alX,y+0,width);}
 });
@@ -32,6 +32,13 @@ funcs.background=((r,g,b)=>{
 	window.at.c.tx.fillRect(0,0,256,256);
 	window.at.fill=fillBefore;
 	updateFillStroke();
+});
+funcs.line=((x1,y1,x2,y2)=>{
+	updateFillStroke();
+	window.at.c.tx.beginPath();
+	window.at.c.tx.moveTo(x1,y1);
+	window.at.c.tx.lineTo(x2,y2);
+	window.at.c.tx.stroke();
 });
 
 window.at={"initiated":false,"initializing":false,"func":{"init":()=>{},"draw":(t,mx,my,sw,sh)=>{}},"fill":[255,255,255],"stroke":[127,127,127],"noStroke":false,"textSettings":{"size":16,"font":"sans-serif","align":"left","style":""}};
