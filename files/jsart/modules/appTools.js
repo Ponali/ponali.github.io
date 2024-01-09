@@ -45,12 +45,34 @@ funcs.line=((x1,y1,x2,y2)=>{
 	window.at.c.tx.lineTo(x2,y2);
 	window.at.c.tx.stroke();
 });
+funcs.getScreenImg=((x,y,w,h)=>{
+	let cnv;
+	x=x+0;y=y+0;w=w+0;h=h+0;
+	x=Math.abs(x);y=Math.abs(y);w=Math.abs(w);h=Math.abs(h);
+	if(([w,h]).includes(undefined)){
+		throw new Error("Please provide a width and height value when using the getScreenImg function.");
+	};
+	if(x+y==0&&w*h==256){}
+})
+
+/*
+function convertCanvasToImage() {
+  let canvas = document.getElementById("canvas");
+  let image = new Image();
+  image.src = canvas.toDataURL();
+  return image;
+}
+
+let pnGImage = convertCanvasToImage();
+document.appendChild(pnGImage);
+*/
 
 window.at={"initiated":false,"initializing":false,"func":{"init":()=>{},"draw":(t,mx,my,sw,sh)=>{}},"fill":[255,255,255],"stroke":[127,127,127],"noStroke":false,"textSettings":{"size":16,"font":"sans-serif","align":"left","style":""}};
 window.at.c={"nv":document.createElement("canvas"),"nvimg":[]};
 window.at.c.nv.width=window.at.c.nv.height=256;
 window.at.c.tx=window.at.c.nv.getContext("2d");
 window.at.c.tx.textBaseline="top";
+window.at.c.tx.lineCap = "round";
 window.at.result=((i,t,x,y,mx,my,sw,sh)=>{
 	if(!window.at.initiated){
 		if(!window.at.initializing){window.at.initializing=true;window.at.func.init()};
@@ -96,3 +118,10 @@ function updateFillStroke(){
 }
 
 })();
+
+class AppToolsError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ValidationError";
+  }
+}
