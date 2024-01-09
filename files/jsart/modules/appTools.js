@@ -49,23 +49,20 @@ funcs.getScreenImg=((x,y,w,h)=>{
 	let cnv;
 	x=x+0;y=y+0;w=w+0;h=h+0;
 	x=Math.abs(x);y=Math.abs(y);w=Math.abs(w);h=Math.abs(h);
-	if(([w,h]).includes(undefined)){
-		throw new Error("Please provide a width and height value when using the getScreenImg function.");
+	if(([w,h]).includes(undefined)&&(x+y!=0)){
+		throw new AppToolsError("Please provide a "+(typeof(w,h)=="undefined"?"width and height":(w?"height":"width"))+" value when using the getScreenImg function.");
 	};
-	if(x+y==0&&w*h==256){}
+	if(x+y==0&&w*h==256**2){
+		cnv=window.at.c.nv;
+	} else {
+		cnv=document.createElement("canvas");
+		cnv.width=w;cnv.height=h;
+		cnv.getContext("2d").drawImage(window.at.c.nv,x,y,w,h,0,0,w,h);
+	};
+	let img=new Image();
+	img.src=cnv.toDataURL();
+	return img;
 })
-
-/*
-function convertCanvasToImage() {
-  let canvas = document.getElementById("canvas");
-  let image = new Image();
-  image.src = canvas.toDataURL();
-  return image;
-}
-
-let pnGImage = convertCanvasToImage();
-document.appendChild(pnGImage);
-*/
 
 window.at={"initiated":false,"initializing":false,"func":{"init":()=>{},"draw":(t,mx,my,sw,sh)=>{}},"fill":[255,255,255],"stroke":[127,127,127],"noStroke":false,"textSettings":{"size":16,"font":"sans-serif","align":"left","style":""}};
 window.at.c={"nv":document.createElement("canvas"),"nvimg":[]};
