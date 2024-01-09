@@ -24,7 +24,12 @@ funcs.setStroke=((r,g,b,a)=>{
 	if(!a){a=255;};if(!g&&!b){window.at.stroke=[r,r,r,a]}else{window.at.stroke=[r,g,b,a];}
 	updateFillStroke();
 });
-funcs.noStroke=(()=>{window.at.noStroke=true;});
+funcs.setStrokeSize=((size)=>{
+	window.at.c.tx.lineWidth=size;
+});
+funcs.getStrokeSize=(()=>{
+	return window.at.c.tx.lineWidth;
+});
 funcs.background=((r,g,b)=>{
 	r=Math.floor(Math.abs(r%256));g=Math.floor(Math.abs(g%256));b=Math.floor(Math.abs(b%256));
 	let fillBefore=window.at.fill;
