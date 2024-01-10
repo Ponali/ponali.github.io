@@ -47,22 +47,18 @@ funcs.line=((x1,y1,x2,y2)=>{
 });
 funcs.getScreenImg=((x,y,w,h)=>{
 	let cnv;
-	x=x+0;y=y+0;w=w+0;h=h+0;
-	x=Math.abs(x);y=Math.abs(y);w=Math.abs(w);h=Math.abs(h);
 	if(([w,h]).includes(undefined)){
 		if(x+y==0){
-			w=h=256;
+			w=h=255;
 		} else {
 			throw new AppToolsError("Please provide a "+(typeof(w,h)=="undefined"?"width and height":(w?"height":"width"))+" value when using the getScreenImg function.");
 		}
 	};
-	if(x+y==0&&w*h==256**2){
-		cnv=window.at.c.nv;
-	} else {
-		cnv=document.createElement("canvas");
-		cnv.width=w;cnv.height=h;
-		cnv.getContext("2d").drawImage(window.at.c.nv,x,y,w,h,0,0,w,h);
-	};
+	x=x+0;y=y+0;w=w+0;h=h+0;
+	x=Math.abs(x);y=Math.abs(y);w=Math.abs(w);h=Math.abs(h);
+	cnv=document.createElement("canvas");
+	cnv.width=w;cnv.height=h;
+	cnv.getContext("2d").drawImage(window.at.c.nv,x,y,w,h,0,0,w,h);
 	return cnv;
 })
 
