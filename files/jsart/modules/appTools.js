@@ -80,6 +80,11 @@ funcs.drawTriangle=((p1,p2,p3)=>{
 	window.at.c.tx.fill();
 	if(!window.at.noStroke){window.at.c.tx.stroke();}
 });
+funcs.drawRectangle=((x,y,w,h)=>{
+	window.at.c.tx.rect(x,y,w,h);
+	window.at.c.tx.fill();
+	if(!window.at.noStroke){window.at.c.tx.stroke();}
+});
 
 window.at={"initiated":false,"initializing":false,"func":{"init":()=>{},"draw":(t,mx,my,sw,sh)=>{}},"fill":[255,255,255],"stroke":[127,127,127],"noStroke":false,"textSettings":{"size":16,"font":"sans-serif","align":"left","style":""}};
 window.at.c={"nv":document.createElement("canvas"),"nvimg":[]};
