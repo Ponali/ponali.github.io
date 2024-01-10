@@ -60,7 +60,26 @@ funcs.getScreenImg=((x,y,w,h)=>{
 	cnv.width=w;cnv.height=h;
 	cnv.getContext("2d").drawImage(window.at.c.nv,x,y,w,h,0,0,w,h);
 	return cnv;
-})
+});
+funcs.drawQuad=((p1,p2,p3,p4)=>{
+	window.at.c.tx.beginPath();
+	window.at.c.tx.moveTo(p1[0],p1[1]);
+	window.at.c.tx.lineTo(p2[0],p2[1]);
+	window.at.c.tx.lineTo(p3[0],p3[1]);
+	window.at.c.tx.lineTo(p4[0],p4[1]);
+	window.at.c.tx.closePath();
+	window.at.c.tx.fill();
+	if(!window.at.noStroke){window.at.c.tx.stroke();}
+});
+funcs.drawTriangle=((p1,p2,p3)=>{
+	window.at.c.tx.beginPath();
+	window.at.c.tx.moveTo(p1[0],p1[1]);
+	window.at.c.tx.lineTo(p2[0],p2[1]);
+	window.at.c.tx.lineTo(p3[0],p3[1]);
+	window.at.c.tx.closePath();
+	window.at.c.tx.fill();
+	if(!window.at.noStroke){window.at.c.tx.stroke();}
+});
 
 window.at={"initiated":false,"initializing":false,"func":{"init":()=>{},"draw":(t,mx,my,sw,sh)=>{}},"fill":[255,255,255],"stroke":[127,127,127],"noStroke":false,"textSettings":{"size":16,"font":"sans-serif","align":"left","style":""}};
 window.at.c={"nv":document.createElement("canvas"),"nvimg":[]};
