@@ -89,8 +89,8 @@ funcs.setOpacity=((a)=>{
 funcs.getOpacity=(()=>{
 	return window.at.c.tx.globalAlpha;
 });
-funcs.drawImage=((im,x1,y1,w1,h1,x2,y2,w2,h2)=>{
-	window.at.c.tx.drawImage(im,x1,y1,w1,h1,x2,y2,w2,h2);
+funcs.drawImage=((im,x,y,w,h)=>{
+	window.at.c.tx.drawImage(im,x,y,w,h);
 });
 
 window.at={"initiated":false,"initializing":false,"func":{"init":()=>{},"draw":(t,mx,my,sw,sh)=>{}},"fill":[255,255,255],"stroke":[127,127,127],"noStroke":false,"textSettings":{"size":16,"font":"sans-serif","align":"left","style":""}};

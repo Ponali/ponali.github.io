@@ -137,7 +137,3 @@ Draws an image onto the screen. More detail [Here](https://developer.mozilla.org
 `y1`:Y position.
 `w1`:Width. (optional)
 `h1`:Height. (optional)
-`x2`:X position. (optional)
-`y2`:Y position. (optional)
-`w2`:Width. (optional)
-`h2`:Height. (optional)
