@@ -5,7 +5,7 @@
 let funcs={};
 funcs.drawText=((text,x,y,width)=>{
 	updateFillStroke();
-	if(!text){console.error("Text must be specified when using the drawText function. The text will not be drawn.");return null;};
+	if(!text){throw new AppToolsError("Text must be specified when using the drawText function. The text will not be drawn.");};
 	window.at.c.tx.font = ([window.at.textSettings.style,window.at.textSettings.size.toString()+"px",window.at.textSettings.font]).filter((str)=>str!=='').join(" ");
 	let al=window.at.textSettings.align;
 	window.at.c.tx.textAlign = ((["l","left"]).includes(al)?"start":((["r","right"]).includes(al)?"end":((["c","middle","center"]).includes(al)?"center":al)));
@@ -81,11 +81,16 @@ funcs.drawTriangle=((p1,p2,p3)=>{
 	if(!window.at.noStroke){window.at.c.tx.stroke();}
 });
 funcs.drawRectangle=((x,y,w,h)=>{
-	/*window.at.c.tx.rect(x,y,w,h);
-		window.at.c.tx.fill();
-		if(!window.at.noStroke){window.at.c.tx.stroke();}
-	*/
 	funcs.drawQuad([x,y],[x+w,y],[x+w,y+h],[x,y+h]);
+});
+funcs.setOpacity=((a)=>{
+	window.at.c.tx.globalAlpha=a;
+});
+funcs.getOpacity=(()=>{
+	return window.at.c.tx.globalAlpha;
+});
+funcs.drawImage=((im,x1,y1,w1,h1,x2,y2,w2,h2)=>{
+	window.at.c.tx.drawImage(im,x1,y1,w1,h1,x2,y2,w2,h2);
 });
 
 window.at={"initiated":false,"initializing":false,"func":{"init":()=>{},"draw":(t,mx,my,sw,sh)=>{}},"fill":[255,255,255],"stroke":[127,127,127],"noStroke":false,"textSettings":{"size":16,"font":"sans-serif","align":"left","style":""}};
