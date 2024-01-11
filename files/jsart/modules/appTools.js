@@ -90,7 +90,7 @@ funcs.getOpacity=(()=>{
 	return window.at.c.tx.globalAlpha;
 });
 funcs.drawImage=((im,x,y,w,h)=>{
-	if((!w)&&(!h)){w=h=256;}
+	if((!w)&&(!h)){w=im.width;h=im.height;}
 	window.at.c.tx.drawImage(im,x,y,w,h);
 });
 
