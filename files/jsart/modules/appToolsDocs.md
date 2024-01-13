@@ -30,6 +30,7 @@ at.func.draw=((t,mx,my,sw,sh)=>{
     at.drawText("counter = "+counter, 10, 10);
 });
 ```
+If you're trying to use this with [JSArt Modded](https://jsam.codersquack.nl/), add the parameters `cl` and `k` in the function.
 However, trying it right now does not do anything, because we didn't put code on where to think. We can put this code in the draw function. After the `at.drawText` line, Type `if(Math.abs(mx-(sw/2))<(sw/8)&&Math.abs(my-(sw/2))<(sw/8)){}`, and inside of that if function, type `counter++;`. Your code should look something like this:
 ```
 (()=>{if(x+y==0){if(!window.aptf){(()=>{fetch("https://ponali.github.io/files/jsart/modules/appTools.js").then(data=>data.text()).then((body)=>{window.aptf.func=new Function("i","t","x","y","mx","my","sw","sh","c","ic","cl","k","return "+body);window.aptf.func();

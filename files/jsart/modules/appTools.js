@@ -110,7 +110,7 @@ window.at.result=((i,t,x,y,mx,my,sw,sh)=>{
 			window.at.c.tx.fillStyle="#000000";
 			window.at.c.tx.fillRect(0,0,256,256);
 			updateFillStroke();
-			window.at.func.draw(t,mx,my,sw,sh);
+			window.at.func.draw(t,mx,my,sw,sh,(cl?cl:0),(k?k:0));
 			makeImage();
 		};
 		let img=window.at.c.nvimg,i=x+(y*256);
