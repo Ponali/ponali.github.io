@@ -105,7 +105,8 @@ Draws a line from a 2D point to another.
 `y2`: y position of the second point.
 ---
 `at.getScreenImg(x,y,w,h)`
-Returns an image with a specified part of the screen to use with `at.drawImage`.
+Returns an image with a specified part of the screen.
+The returned image must be used with `at.drawImage`, using parameters or functions from a normal Image element may not work.
 `x`: X position
 `y`: Y position
 `w`: Width

@@ -15,7 +15,7 @@
 	at.func.draw=((t,mx,my,sw,sh)=>{
 		/* this function is called every frame (60 times per second)
 		this is where you should make your app think and render elements. */
-		at.noStroke=false; /* Stroke should be disabled: text must be filled, but mustn't have a stroke. */
+		at.noStroke=true; /* Stroke should be disabled: text must be filled, but mustn't have a stroke. */
 		if((mx<10)&&(!inputBef)){
 			let inTxt=prompt("Enter new text: "); /* when using prompt() or generally alert functions, the mouse does not update, so a way of avoiding repetitions was added with the inputBef variable */
 			if(inTxt){txt=inTxt;}
