@@ -24,7 +24,7 @@
 				<img src="costume3.svg" />
 				<div class="content">
 					<h1>what <span style="color:#c0c0cc;">(programming language)</span> do i use to make my projects?</h1>
-					<p>it actually depends on what i'm familiar to: for video processing, i use batch (or a "windows terminal" script) when it uses a lot of ffmpeg/codec stuff (datamoshing), but if it uses complex image manipulation, or just processing only one image, i use python. for video games, i generally make those with scratch. yes ik its made for kids but i keep coming back to experiment with it. for <i>live</i> video on the other hand (which i only do rarely), i use python with pygame, or processing. sometimes, i don't actually do anything with stardard programming languages: i try to make <a href="https://esolangs.org/wiki/Brainfuck">brainf<span style="font-family:Wingdings;">asj</font></a> actually be able to start doing actual advanced things a normal computer would do. no, i'm not doing this by hand, i use an open-source tool called <a href="https://github.com/elikaski/BF-it">BF-it</a> that literally takes code that looks like C and compiles it into actual brainf&#12356;&#12356;&#12360; code. for publishing my work, i <i>was</i> on replit but then moved to GitHub pages. for making websites, i use HTML CSS JS, and no, i don't use react, deal with it</p>
+					<p>it actually depends on what i'm familiar to: for video processing, i use batch (or a "windows terminal" script) when it uses a lot of ffmpeg/codec stuff (datamoshing), but if it uses complex image manipulation, or just processing only one image, i use python. for video games, i generally make those with scratch. yes ik its made for kids but i keep coming back to experiment with it. for <i>live</i> video on the other hand (which i only do rarely), i use python with pygame, or processing. sometimes, i don't actually do anything with stardard programming languages: i try to make <a href="https://esolangs.org/wiki/Brainfuck">brainfuck</a> actually be able to start doing actual advanced things a normal computer would do. no, i'm not doing this by hand, i use an open-source tool called <a href="https://github.com/elikaski/BF-it">BF-it</a> that literally takes code that looks like C and compiles it into actual brainfuck code. for publishing my work, i <i>was</i> on replit but then moved to GitHub pages. for making websites, i use HTML CSS JS, and no, i don't use react, deal with it</p>
 				</div>
 			</li>
 			<li id="info-contact">
@@ -71,12 +71,12 @@
 				overflow-x: hidden;
 				transition:opacity 1s;
 			}
-			body.load ul#mainlist{
+			body.load ul#mainlist, body.load p#repo{
 				display:none;
 			}
 			body.load::after{
 				white-space: pre;
-				content: "please wait, the website is currently loading\Aif you're stuck: please reactivate javascript or check your internet connection";
+				content: "please wait, the website is currently loading\A\Aif you're stuck: please reactivate javascript or check your internet connection\Aif you're still stuck, please check console for errors";
 				text-align: center !important;
 				display: flex;
 				height: 100%;
@@ -184,12 +184,12 @@
 			async function welcomeAnim(elem){
 				//await delay(500);
 				let d=new Date();
-				let texts=("hi/hello/hey/welcome/coucou/bon"+(d.getHours()<=16?"jour":"soir")+"/welkommen/guten "+(d.getHours()<12?"morgen":(d.getHours()<18?"tag":"abend"))+"/hallo/\u3044\u3089\u3063\u3057\u3083\u3044\u307e\u305b/"+(d.getHours()<12?"\u304a\u306f\u3088\u3046":"\u3053\u3093"+(d.getHours()<18?"\u306b\u3061":"\u3070\u3093")+"\u306f")+"/\u03ba\u03b1\u03bb\u03c9\u03c3\u03cc\u03c1\u03b9\u03c3\u03bc\u03b1/"+(d.getHours()<12?"\u03ba\u03b1\u03bb\u03b7\u03bc\u03ad\u03c1\u03b1":"\u03ba\u03b1\u03bb\u03cc\x20\u03b1\u03c0\u03cc\u03b3\u03b5\u03c5\u03bc\u03b1")+"/sveiki/"+(d.getHours()<12?"labas rytas":(d.getHours()<18?"laba diena":"labas vakaras"))+"/ANANAS".repeat(Math.random()>=0.7)+"/kreisi".repeat(Math.random()>=0.8)).split("/");
+				let texts=("hi/hello/hey/welcome/coucou/bon"+(d.getHours()<=16?"jour":"soir")+"/welkommen/guten "+(d.getHours()<12?"morgen":(d.getHours()<18?"tag":"abend"))+"/hallo/\u3044\u3089\u3063\u3057\u3083\u3044\u307e\u305b/"+(d.getHours()<12?"\u304a\u306f\u3088\u3046":"\u3053\u3093"+(d.getHours()<18?"\u306b\u3061":"\u3070\u3093")+"\u306f")+"/\u03ba\u03b1\u03bb\u03c9\u03c3\u03cc\u03c1\u03b9\u03c3\u03bc\u03b1/"+(d.getHours()<12?"\u03ba\u03b1\u03bb\u03b7\u03bc\u03ad\u03c1\u03b1":"\u03ba\u03b1\u03bb\u03cc\x20\u03b1\u03c0\u03cc\u03b3\u03b5\u03c5\u03bc\u03b1")+"/sveiki/"+(d.getHours()<12?"labas rytas":(d.getHours()<18?"laba diena":"labas vakaras"))+"/ANANAS".repeat(Math.random()>=0.85)+"/kreisi".repeat(Math.random()>=0.85)+"/the fitness gram pacer test is a multistage aerobic capacity test that progressively gets more difficult as it continues".repeat(Math.random()>=0.85)+"/asajdsajddjajssdajajasjddasj".repeat(Math.random()>=0.85)+"/sample text".repeat(Math.random()>=0.85)).split("/");
 				console.log(texts);
 				let text,textBef;
 				while(true){
 					while(text==textBef){
-						text=texts[Math.floor(Math.random()*texts.length)];
+						text=texts[Math.abs(Math.round(Math.random()*texts.length)%texts.length)];
 					};
 					textBef=text;
 					await type(elem.querySelector("h1"),text);
