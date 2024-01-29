@@ -24,7 +24,7 @@
 				<img src="costume3.svg" />
 				<div class="content">
 					<h1>what <span style="color:#c0c0cc;">(programming language)</span> do i use to make my projects?</h1>
-					<p>it actually depends on what i'm familiar to: for video processing, i use batch (or a "windows terminal" script) when it uses a lot of ffmpeg/codec stuff (datamoshing), but if it uses complex image manipulation, or just processing only one image, i use python. for video games, i generally make those with scratch. yes ik its made for kids but i keep coming back to experiment with it. for <i>live</i> video on the other hand (which i only do rarely), i use python with pygame, or processing. sometimes, i don't actually do anything with stardard programming languages: i try to make <a href="https://esolangs.org/wiki/Brainfuck">brainfuck</a> actually be able to start doing actual advanced things a normal computer would do. no, i'm not doing this by hand, i use an open-source tool called <a href="https://github.com/elikaski/BF-it">BF-it</a> that literally takes code that looks like C and compiles it into actual brainfuck code. for publishing my work, i <i>was</i> on replit but then moved to GitHub pages. for making websites, i use HTML CSS JS, and no, i don't use react, deal with it</p>
+					<p>it depends on what i work on, but generally i use html/css/js, python, rarely node.js, batch (or "windows command line"), and if i want to experiment with stuff i have <a href="https://esolangs.org/wiki/Brainfuck">brainfuck</a> (with <a href="https://github.com/elikaski/BF-it">BF-it</a>) on my side. i currently use github to publish my work.</p>
 				</div>
 			</li>
 			<li id="info-contact">
@@ -168,6 +168,10 @@
 			}
 		</style>
 		<script>
+			let m=Math,d=document,Q=(a)=>{return d.querySelectorAll(a)},q=(a)=>{return Q(a)[0]};
+			function isLatin(a){try{return !!btoa(a);}catch{return ![];}};
+			[].__proto__.random=function(){return this[m.floor(m.random()*this.length)]};
+			"".__proto__.random=function(){return this.split("").random()};
 			const delay = ms => new Promise(res => setTimeout(res, ms));
 			window.onload=(()=>{
 				document.querySelectorAll("a").forEach((a)=>{a.setAttribute("target","_blank")});
@@ -186,12 +190,13 @@
 				let d=new Date();
 				let texts=("hi/hello/hey/welcome/coucou/bon"+(d.getHours()<=16?"jour":"soir")+"/welkommen/guten "+(d.getHours()<12?"morgen":(d.getHours()<18?"tag":"abend"))+"/hallo/\u3044\u3089\u3063\u3057\u3083\u3044\u307e\u305b/"+(d.getHours()<12?"\u304a\u306f\u3088\u3046":"\u3053\u3093"+(d.getHours()<18?"\u306b\u3061":"\u3070\u3093")+"\u306f")+"/\u03ba\u03b1\u03bb\u03c9\u03c3\u03cc\u03c1\u03b9\u03c3\u03bc\u03b1/"+(d.getHours()<12?"\u03ba\u03b1\u03bb\u03b7\u03bc\u03ad\u03c1\u03b1":"\u03ba\u03b1\u03bb\u03cc\x20\u03b1\u03c0\u03cc\u03b3\u03b5\u03c5\u03bc\u03b1")+"/sveiki/"+(d.getHours()<12?"labas rytas":(d.getHours()<18?"laba diena":"labas vakaras"))+"/ANANAS".repeat(Math.random()>=0.85)+"/kreisi".repeat(Math.random()>=0.85)+"/the fitness gram pacer test is a multistage aerobic capacity test that progressively gets more difficult as it continues".repeat(Math.random()>=0.85)+"/asajdsajddjajssdajajasjddasj".repeat(Math.random()>=0.85)+"/sample text".repeat(Math.random()>=0.85)).split("/");
 				console.log(texts);
-				let text,textBef;
+				let text;
+				let textLast=[text];
 				while(true){
-					while(text==textBef){
+					while(textLast.includes(text)){
 						text=texts[Math.abs(Math.round(Math.random()*texts.length)%texts.length)];
 					};
-					textBef=text;
+					textLast.push(text);if(textLast.length>4){textLast=textLast.slice(-4);}
 					await type(elem.querySelector("h1"),text);
 					await delay(200+(Math.random()*300));
 					elem.querySelector("h1 span#spantext").style.background="#00f"
@@ -203,12 +208,31 @@
 					elem.innerHTML="<span id=\"spantext\">sample text</span><div id=\"txtcur\">\u200b</span>";
 					let cur="";
 					for(i=0;i<text.length;i++){
+						if(Math.random()>=0.95){
+							let curBef=cur;
+							let lett=makeTypoLetter(text);
+							while (lett==text[i]){
+								lett=makeTypoLetter(text);
+							}
+							cur+=lett;
+							elem.children[0].innerText=cur;
+							await delay(400-(Math.random()*200));
+							cur=curBef;
+							elem.children[0].innerText=cur;
+							await delay(550-(Math.random()*300));
+						}
 						cur+=text[i];
 						elem.children[0].innerText=cur;
 						await delay(150-(Math.random()*100));
 					}
 					resolve('resolved');
 				});
+			};
+			function makeTypoLetter(a){
+				let minch=a.split("").reduce((a,b)=>{return String.fromCharCode(Math.min((a+"").charCodeAt(),(b+"").charCodeAt()));}).charCodeAt();
+				let maxch=a.split("").reduce((a,b)=>{return String.fromCharCode(Math.max((a+"").charCodeAt(),(b+"").charCodeAt()));}).charCodeAt();
+				let b=("abcdefghijklmnopqrstuvwxyz *%@,;:§/"+([...Array((maxch-minch)+1).keys()].map((a)=>{return String.fromCharCode(a+minch);}).join(""))).split("/");
+				return b[(!isLatin(a))+0].random();
 			}
 		</script>
 	</body>
