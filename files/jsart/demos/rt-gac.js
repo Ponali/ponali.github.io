@@ -1,15 +1,15 @@
 (()=>{
 	if(x+y==0){
 		if(!window.rtGac){
-			alert("Real-time Glitchart compilation -- created by @Ponali\n/!\\ Some filters may lag.\n\nChangelog:\nv1.0.5: Added \"broken\" filter (breaks the screen)\nv1.0.4: Added 4 experiences.\nv1.0.3: Added 6 experiences.\nv1.0.2: Added \"projector\" filter (blurs x-axis)\nv1.0.1: Added 3 experiences.");
+			alert("Real-time Glitchart compilation -- created by @Ponali\n/!\\ Some filters may lag.\n\nChangelog:\nv1.0.6: Added 4 experiences.\nv1.0.5: Added \"broken\" filter (breaks the screen)\nv1.0.4: Added 4 experiences.\nv1.0.3: Added 6 experiences.\nv1.0.2: Added \"projector\" filter (blurs x-axis)\nv1.0.1: Added 3 experiences.");
 			window.rtGac={expA:0,expB:0,crt:0,proj:0,brok:0,change:0};
 		};
 		if(window.rtGac.change<t){
 			window.rtGac.change=t+5000;
-			window.rtGac.expA=Math.floor(Math.random()*20);
-			window.rtGac.expB=Math.floor(Math.random()*20);
+			window.rtGac.expA=Math.floor(Math.random()*24);
+			window.rtGac.expB=Math.floor(Math.random()*24);
 			while(window.rtGac.expA==window.rtGac.expB){
-				window.rtGac.expB=Math.floor(Math.random()*20);
+				window.rtGac.expB=Math.floor(Math.random()*24);
 			};
 			window.rtGac.crt=Math.random()>=0.8;
 			window.rtGac.proj=Math.random()>=0.8;
@@ -38,6 +38,10 @@
 			case 17:return ((Math.sqrt((((x%128)-64)**2)+(((y%128)-64)**2))<=64)*0xffffff)^((x-128)*(y-128)+(t/2));
 			case 18:return y<64?-(((x/4)*(y/4)+(Math.floor(t/50)*50/400))%2):(((Math.floor((x/32)+(t/-1000))%2)^(Math.sin(Math.sin(Math.sin((x/15)+(t/400))-t/200))*30+128<y))*0xffff8f)^-(((((y+(Math.sin((y/100)+(x/50)+(t/400))*10))-165)%40)+165)>185);
 			case 19:return 0xffffff*((Math.abs(y-Math.abs(((t/(8000+x))%2)-1)*255)<10)^(Math.abs(x-Math.abs(((t/(8000+(y+256)))%2)-1)*255)<10));
+			case 20:return (Math.floor((Math.sin((x/20)+(t/300))*Math.sin((x/15)+(t/250))*Math.sin((x/10)+(t/200))+1)*127.5)^((Math.floor((y/64)+Math.sin((x/80)+(t/500))/4)%2)*255))*0x10101;
+			case 21:return (((x+y+(t/10))^(y+(t/50))^(x-y))&0xff)+(((x+y+(t/15))^(y+(t/30))^(x-y+(t/40)))&0xff)*256+(((x+y+(t/8))^(y+(t/80))^(x-y))&0xff)*0x10000;
+			case 22:return ((Math.floor(y/32)%2)*0xff)+((Math.floor((x+(y/10)+(t/40))/32)%2)*0xff00)+(Math.floor((x+y)/2)*0x10000);
+			case 23:return (((Math.floor(Math.sqrt(((x-128)**2)+((y-128)**2))/(16+Math.sin((t/400)+(x/40)+(y/30))))%2)&(1-(x>128&&x-128>Math.abs(y-128)&&Math.sqrt(((x-128)**2)+((y-128)**2))<40)))*0xff00ff)^(((x-128)/((y-128)/256)+(t/4))&0xffff);
 			default:return Math.random()*0xffffff;
 		}
 	};
