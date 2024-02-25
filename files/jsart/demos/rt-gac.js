@@ -1,20 +1,22 @@
 (()=>{
 	if(x+y==0){
 		if(!window.rtGac){
-			alert("Real-time Glitchart compilation -- created by @Ponali\n/!\\ Some filters may lag.\n\nChangelog:\nv1.0.8: Added 8 experiences.\nv1.0.7: Added \"vhs\" filter and fixed small bugs.\nv1.0.6: Added 4 experiences.\nv1.0.5: Added \"broken\" filter (breaks the screen)\nv1.0.4: Added 4 experiences.\nv1.0.3: Added 6 experiences.\nv1.0.2: Added \"projector\" filter (blurs x-axis)\nv1.0.1: Added 3 experiences.");
-			window.rtGac={expA:0,expB:0,crt:0,proj:0,brok:0,vhs:0,change:0};
+			alert("Real-time Glitchart compilation -- created by @Ponali\n/!\\ Some filters may lag.\n\nChangelog:\nv1.0.9: Added 8 experiences.\nv1.0.8: Added 8 experiences.\nv1.0.7: Added \"vhs\" filter and fixed small bugs.\nv1.0.6: Added 4 experiences.\nv1.0.5: Added \"broken\" filter (breaks the screen)\nv1.0.4: Added 4 experiences.\nv1.0.3: Added 6 experiences.\nv1.0.2: Added \"projector\" filter (blurs x-axis)\nv1.0.1: Added 3 experiences.");
+			window.rtGac={expA:0,expB:0,crt:0,proj:0,brok:0,vhs:0,bord:0,ana:0,change:0};
 		};
 		if(window.rtGac.change<t){
 			window.rtGac.change=t+5000;
-			window.rtGac.expA=Math.floor(Math.random()*32);
-			window.rtGac.expB=Math.floor(Math.random()*32);
+			window.rtGac.expA=Math.floor(Math.random()*40);
+			window.rtGac.expB=Math.floor(Math.random()*40);
 			while(window.rtGac.expA==window.rtGac.expB){
-				window.rtGac.expB=Math.floor(Math.random()*32);
+				window.rtGac.expB=Math.floor(Math.random()*40);
 			};
 			window.rtGac.crt=Math.random()>=0.85;
 			window.rtGac.proj=Math.random()>=0.85;
 			window.rtGac.brok=Math.random()>=0.9;
 			window.rtGac.vhs=Math.random()>=0.88;
+			window.rtGac.bord=Math.random()>=0.8;
+			window.rtGac.ana=Math.random()>=0.9;
 		};
 	};
 	function getExp(a){
@@ -51,6 +53,14 @@
 			case 29:return (((((((x-128)*((3+(Math.sin(t/500)**9))/2))+((y-128)*((3+(Math.cos(t/500)**9))/2)))^(((y-128)*((3+(Math.cos(t/500)**9))/2))-((x-128)*((3+(Math.sin(t/500)**9))/2))))&255)&0xff)<<16)+(((255-(Math.abs(x-128)**1.5+Math.abs(y-128)**1.5)**(1/1.5))*10+(t/3)&0xff)<<8)+(((255-Math.abs((x*2+(y-x)-128)+(y-x)-256))+(255-Math.abs((y-x)-(x*2+(y-x)-128))))*3+(t/3)&0xff);
 			case 30:return (x+(Math.floor(y/8)%(8+2*Math.sin((x/80)+(t/500))))*8)+(t/10);
 			case 31:return Math.abs(y-128)*2<192?(((1-(Math.min(Math.abs(Math.sin(x/60+t/600)*Math.sin(x/50+t/550)*Math.sin(x/40+t/500)*Math.sin(x/35+t/450)*Math.sin(x/30+t/400)*Math.sin(x/25+t/350)*Math.sin(x/20+t/300)*80-y+128),10)/10))*255)+((Math.min(Math.max((y-128+16)*16,0),255)-127.5)*((Math.min(Math.abs((Math.sqrt((x-128)**2+(y-128+Math.sin(x/10+t/400))**2)-50)/(5+Math.sin(t/500)*4)),1)-0.5)*2)+127.5<<8)):(x^y+(t/40));
+			case 32:return (((x-128)*Math.sin(x/150+t/400)+(y-128)*Math.cos(t/500-x/100))>0)*0xffffff^Math.floor(255-((Math.abs(x-128)*(2+Math.sin(t/500)**9))%64)-((Math.abs(y-128)*(2+Math.cos(t/800)**9))%64))*0x1ff01;
+			case 33:return 0xff0000*(Math.sqrt(x**2+y**2)<(80+Math.sin(t/400+x/20+y/20)*10))^x+(y*256)^(0xffffff*(Math.abs(Math.sqrt(((x%127.5)-64)**2+(Math.abs((y%90)-44)-(2*(x>128)+(Math.sin(t/(400+10*(x>128)))+1)*(1-(2*(x>128))))*22)**2)-40)<4))^(0xffffff*(Math.abs(Math.sqrt(((y%127.5)-64)**2+(Math.abs((x%90)-44)-(2*(y>128)+(Math.sin(t/(420+10*(y>128)))+1)*(1-(2*(y>128))))*22)**2)-40)<4));
+			case 34:return Math.floor(Math.max(Math.min(256-Math.abs((t/4000+y*1.5555)%2-1)*256-x,1),0)*255)*0x10101;
+			case 35:return Math.sin(Math.floor((x-128)/(16+Math.sin(t/600)*4))+(Math.floor((t/400)+(y-128)/(16+Math.cos(t/600)))*256))*0xffffff;
+			case 36:return ((x^y^(Math.sin(t/1000+y/1000)*128+128+x)&0xff)^Math.floor((y*4)+t/10+Math.sin(Math.sqrt((x-128)**2+(y-128)**2)/16+t/200)*10)*256)^(Math.floor(Math.sqrt((x-128)**2+(y-128)**2)-t/10))*0x10000;
+			case 37:return (((Math.floor(((((Math.abs((Math.floor(x+t/20)/256)%2)-1)*256*2+((Math.abs((Math.floor(y+t/20+100)/256)%2)-1)*256-(Math.abs((Math.floor(x+t/20)/256)%2)-1)*256))*3)/256-1.5)*(3**Math.floor((256-(Math.abs(((Math.abs((Math.floor(x+t/20)/256)%2)-1)*256*2+((Math.abs((Math.floor(y+t/20+100)/256)%2)-1)*256-(Math.abs((Math.floor(x+t/20)/256)%2)-1)*256))-127.5)/1+127.5))/256*3))+1.5)/(1+(Math.sqrt((x+Math.sin(y/20+t/500)*10)**2+(y+Math.sin(x/20+t/500)*10)**2)>256)))+(Math.floor(((((Math.abs((Math.floor(y+t/20+100)/256)%2)-1)*256-(Math.abs((Math.floor(x+t/20)/256)%2)-1)*256)*3)/256-1.5)*(3**Math.floor((256-(Math.abs(((Math.abs((Math.floor(y+t/20+100)/256)%2)-1)*256-(Math.abs((Math.floor(x+t/20)/256)%2)-1)*256)-127.5)/1+127.5))/256*3))+1.5)/(1+(Math.sqrt((x+Math.sin(y/20+t/500)*10)**2+(y+Math.sin(x/20+t/500)*10)**2)>246)))*256)/(1.1+(Math.floor(((((Math.abs((Math.floor(y+t/20+100)/256)%2)-1)*256-(Math.abs((Math.floor(x+t/20)/256)%2)-1)*256)*3)/256-1.5)*(3**Math.floor((256-(Math.abs(((Math.abs((Math.floor(y+t/20+100)/256)%2)-1)*256-(Math.abs((Math.floor(x+t/20)/256)%2)-1)*256)-127.5)/1+127.5))/256*3))+1.5)/(1+(Math.sqrt((x+Math.sin(y/20+t/500)*10)**2+(y+Math.sin(x/20+t/500)*10)**2)>236)))/255))*16777215;
+			case 38:return (Math.floor(Math.max(Math.min(1-(x+Math.sin(Math.sqrt((x-128)**2+(y-128)**2)/5-t/400)*((y**.5)*8)-128),1),0)*223)*0x10101)^(((255-Math.sqrt((x-256)**2+y**2))+t/50+Math.sin(x/30+t/600)*20)&0xff);
+			case 39:return (Math.abs(Math.abs(Math.sqrt((x-127.5)**2+(y-127.5)**2)/15-t/800+Math.sin(y/50+t/400)/1.5)%2-1)<0.3)&&(Math.abs(x-127.5)+127.5>Math.abs(y-127.5)+127.5)?0xffffff:(Math.floor(255-Math.min(255,Math.max(0,0-(Math.sqrt((x-127.5)**2+((y-127.5)/2)**2)-127.5)*3)))*0x10000)+Math.floor(Math.floor((Math.abs((((((y-127.5)/((x-127.5)/256)+t/10)&0xff)/128)%2)-1)+1)*127.5)*Math.max(0,255-Math.sqrt(((x-128)/2)**2+((y-128)*2)**2))/255);
 			default:return Math.random()*0xffffff;
 		}
 	};
