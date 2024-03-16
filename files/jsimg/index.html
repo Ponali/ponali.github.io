@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas></canvas>
+<div>
+<input id="imgurl" type="text" value="https://picsum.photos/256"></input>
+<button id="refreshImgBtn">Refresh image</button>
+</div>
+<textarea id="func">return ((a,b,x,y)=>(b!=3?(a+(x^y))/2:255))</textarea>
+<select id="io">
+<option value="1">send value per value (value,channel,x,y) -> number</option>
+<option value="2">send pixel value array (r,g,b,x,y) -> [number x3]</option>
+</select>
+<script src="script.js"></script>
+<style>
+body{display:flex;flex-direction:column;flex-wrap:nowrap;align-content:center;justify-content:center;align-items:center;margin:5px;}
+#imgurl{width:512px;}
+#func{width:90%;}
+canvas{zoom:2;image-rendering:pixelated;}
+</style>
+</body>
+</html>
