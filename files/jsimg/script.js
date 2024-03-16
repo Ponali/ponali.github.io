@@ -29,12 +29,13 @@ function getOriginalImageData(dataog,data){
 	return dataog;
 }
 function changeImage(){
+	x.clearRect(0,0,256,256);
 	x.drawImage(currentImage,0,0,256,256);
 	let dataog=x.getImageData(0,0,256,256),data=getModifiedImageData(dataog.data);
 	if(q("#io").value=="1"){
 		for(di in data){data[di]=0xff&func(data[di],di%4,floor(di/4)%256,floor(floor(di/4)/256))};
 	} else {
-		for(di in data){data[di]=func(data[di][0],data[di][1],data[di][2],di%256,floor(di/256));};
+		for(di in data){data[di]=func(data[di][0],data[di][1],data[di][2],di%256,floor(di/256)).map((a)=>0xff&a);};
 	};
 	x.clearRect(0,0,256,256);
 	x.putImageData(getOriginalImageData(dataog,data),0,0);
