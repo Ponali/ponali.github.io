@@ -541,7 +541,10 @@
 		}
 		stageScreenshot(){
 			// DO NOT REMOVE, USER HAS NOT GIVEN PERMISSION TO SAVE CAMERA IMAGES.
-			if (this.runtime.ext_videoSensing || this.runtime.ioDevices.video.provider.enabled) {
+			let a=false,b=false;
+			try{a=this.runtime.ext_videoSensing}catch{console.log("error with value")}
+			try{b=this.runtime.ioDevices.video.provider.enabled}catch{console.log("error with value")}
+			if (a || b) {
 				// user's camera is on, ask for permission to take a picture of them
 				if (!(this.isCameraScreenshotEnabled)) {
 					this.isCameraScreenshotEnabled = ProjectPermissionManager.RequestPermission("cameraPictures");
