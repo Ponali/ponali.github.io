@@ -1,3 +1,13 @@
+let exampleScripts=[
+	{rgb:(!0),tx:"let sz=[1,1,1];return ((r,g,b,x,y)=>{let a=[r,g,b].map((a,b,c)=>abs(a-c[(b+1)%3]));sz=sz.map((c,b)=>max(a[b],c));return a.map((a,b)=>a/(sz[b]/255));})"},
+	{rgb:(!0),tx:"let a=[0,0,0];return ((r,g,b,x,y)=>{let ratio=((y/255)**5)+0.1;y=y+28;let blur=3+sin(y/10.9)*sin(y/11.8)*sin(y/12.7)*sin(y/13.6)*sin(y/14.5)*sin(y/15.4)*sin(y/16.3)*sin(y/17.2)*sin(y/18.1)*sin(y/19)*60;blur=max(blur,1);a=[r,g,b].map((c)=>c*(1-ratio)+random()*255*ratio).map((c,d)=>a[d]+(c-a[d])/(blur+sin(d*8+(x+y*256)/2560)));return a;});"},
+	{rgb:(!0),tx:"let keep=[0,0,0];return ((r,g,b,x,y)=>{keep=[r,g,b].map((a,b)=>(keep[b]+a)/1.5);return keep.map((a)=>abs((a/255+1)%2-1)*255)})"},
+	{rgb:(!0),tx:"let c=[0,0,0];return ((r,g,b,x,y)=>{let a=[r,g,b];c=c.map((c,b)=>(abs(c-a[b])>50?a[b]:c));return c;})"},
+	{rgb:(!0),tx:"let c=[0,0,0],d=0;return ((r,g,b,x,y)=>{let a=[r,g,b];c=c.map((c,b)=>{if(abs(c-a[b])>(70-d)){d=0;return a[b]};return c});d++;return c.map((a)=>a+(random()-0.5)*2*min(d,255)).map((a)=>min(max(a,0),255));})"},
+	{rgb:(!0),tx:"function minr(a){let b=255;a.forEach((a)=>{b=min(b,a)});return b;};function maxr(a){let b=0;a.forEach((a)=>{b=max(b,a)});return b;};return ((r,g,b,x,y)=>{return [r,g,b].map((a,b,c)=>{let m=[minr(c),maxr(c)];return min((a-m[0])/(m[1]-m[0])*255,255)});});"},
+	{rgb:(!0),tx:"colorPalleteLimit=6;// color pallete limit: goes from 0-8\nfunction limit(a,i,q){return min([floor,round,ceil][((i%256)^floor(i/256))%3](a/q)*q,255);};return ((r,g,b,x,y)=>{return [r,g,b].map((a)=>limit(a,x+y*256,2**colorPalleteLimit));})"},
+	{rgb:(!0),tx:"let ratio=0; /* -1: cold. 0: normal. 1: hot. */\nreturn ((r,g,b,x,y)=>{let cold=[r,g,b].sort((a,b)=>a-b);let hot=[r,g,b].sort((a,b)=>b-a);return [r,g,b].map((a,b)=>(a*(1-abs(ratio)))+hot[b]*max(ratio,0)+cold[b]*(0-min(ratio,0)));})"},
+];
 let hexEncode=((a)=>{return a.split("").map((b)=>b.charCodeAt().toString(16).padStart(2,"0")).join("")}),hexDecode=((a)=>{return a.match(/.{1,2}/g).map((a)=>String.fromCharCode(parseInt(a,16))).join("")}),
 d=document,Q=(a)=>d.querySelectorAll(a),q=(a)=>Q(a)[0]
 Object.getOwnPropertyNames(Math).forEach((a)=>{window[a]=Math[a]})
@@ -52,3 +62,8 @@ if(location.hash.replace("#","")!=""){
 }
 updateEL();
 q("#refreshImgBtn").addEventListener("click",()=>{currentImage=createPlainImage();imgurl="";updateEL();});
+function loadExample(n){
+	q("#func").value=exampleScripts[n].tx;
+	q("#io").value=exampleScripts[n].rgb+1;
+	updateEL();
+}
