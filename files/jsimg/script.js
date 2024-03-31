@@ -1,3 +1,17 @@
+let exampleScripts=[
+	{rgb:(!0),tx:"let sz=[1,1,1];return ((r,g,b,x,y)=>{let a=[r,g,b].map((a,b,c)=>abs(a-c[(b+1)%3]));sz=sz.map((c,b)=>max(a[b],c));return a.map((a,b)=>a/(sz[b]/255));})"},
+	{rgb:(!0),tx:"let a=[0,0,0];return ((r,g,b,x,y)=>{let ratio=((y/255)**5)+0.1;y=y+28;let blur=3+sin(y/10.9)*sin(y/11.8)*sin(y/12.7)*sin(y/13.6)*sin(y/14.5)*sin(y/15.4)*sin(y/16.3)*sin(y/17.2)*sin(y/18.1)*sin(y/19)*60;blur=max(blur,1);a=[r,g,b].map((c)=>c*(1-ratio)+random()*255*ratio).map((c,d)=>a[d]+(c-a[d])/(blur+sin(d*8+(x+y*256)/2560)));return a;});"},
+	{rgb:(!0),tx:"let keep=[0,0,0];return ((r,g,b,x,y)=>{keep=[r,g,b].map((a,b)=>(keep[b]+a)/1.5);return keep.map((a)=>abs((a/255+1)%2-1)*255)})"},
+	{rgb:(!0),tx:"let c=[0,0,0];return ((r,g,b,x,y)=>{let a=[r,g,b];c=c.map((c,b)=>(abs(c-a[b])>50?a[b]:c));return c;})"},
+	{rgb:(!0),tx:"let c=[0,0,0],d=0;return ((r,g,b,x,y)=>{let a=[r,g,b];c=c.map((c,b)=>{if(abs(c-a[b])>(70-d)){d=0;return a[b]};return c});d++;return c.map((a)=>a+(random()-0.5)*2*min(d,255)).map((a)=>min(max(a,0),255));})"},
+	{rgb:(!0),tx:"function minr(a){let b=255;a.forEach((a)=>{b=min(b,a)});return b;};function maxr(a){let b=0;a.forEach((a)=>{b=max(b,a)});return b;};return ((r,g,b,x,y)=>{return [r,g,b].map((a,b,c)=>{let m=[minr(c),maxr(c)];return min((a-m[0])/(m[1]-m[0])*255,255)});});"},
+	{rgb:(!0),tx:"colorPalleteLimit=6;// color pallete limit: goes from 0-8\nfunction limit(a,i,q){return min([floor,round,ceil][((i%256)^floor(i/256))%3](a/q)*q,255);};return ((r,g,b,x,y)=>{return [r,g,b].map((a)=>limit(a,x+y*256,2**colorPalleteLimit));})"},
+	{rgb:(!0),tx:"let ratio=0; /* -1: cold. 0: normal. 1: hot. */\nreturn ((r,g,b,x,y)=>{let cold=[r,g,b].sort((a,b)=>a-b);let hot=[r,g,b].sort((a,b)=>b-a);return [r,g,b].map((a,b)=>(a*(1-abs(ratio)))+hot[b]*max(ratio,0)+cold[b]*(0-min(ratio,0)));})"},
+	{rgb:(!0),tx:"return ((r,g,b,x,y)=>{x=x+(((r+g+b)/3/255-0.5)*64);y=y+(((r+g+b)/3/255-0.5)*64);let change=sqrt((x-127.5)**2+(y-255)**2)/6;let full=PI*2;return [r,g,b].map((a)=>(a-127.5)/127.5).map((a,b,c)=>c[(b)%3]*cos(change)+c[(b+1)%3]*cos(change+full/3)+c[(b+2)%3]*cos(change+full/3*2)).map((a)=>max(min(a*127.5+127.5,255),0));})"},
+	{rgb:(!0),tx:"let mx=[0,0,0];return ((r,g,b,x,y)=>{mx=mx.map((a,c)=>max(a/1.001,[r,g,b][c]));return [r,g,b].map((a,b)=>(mx[b]-a)+(random()-0.5)*(r+g+b)/3).map((a)=>max(min(a,255),0))})"},
+	{rgb:(!0),tx:'let staticRatio=0.1; // value from 0-1\nfunction rgb2cmyk(r,g,b){\n  [r,g,b]=[r,g,b].map((a)=>a/255)\n  let k=1-max(r,max(g,b));\n  let c=(1-r-k)/(1-k);\n  let m=(1-g-k)/(1-k);\n  let y=(1-b-k)/(1-k);\n  return [c,m,y,k]\n}; // call them from 0-1 values\n\nfunction cmyk2rgb(a){\n  let c,m,y,k;[c,m,y,k]=a;\n  [c,m,y,k]=[c,m,y,k].map((a)=>1-a)\n  let r=c*k;\n  let g=m*k;\n  let b=y*k;\n  return [r,g,b].map((a)=>a*255)\n}\n\nreturn ((r,g,b,x,y)=>{\n  let a=rgb2cmyk(r,g,b);\n  a=a.map((a)=>a*(1-staticRatio)+random()*staticRatio)\n  return cmyk2rgb(a);\n})'},
+	{rgb:(!0),tx:'let hueRotate=120; // measurement is in degrees\n// thanks to Kamil for the conversion functions.\n// https://stackoverflow.com/a/54071699/860099\n// https://stackoverflow.com/a/64090995/860099\nfunction rgb2hsl(arr) {let r,g,b;[r,g,b]=arr.map((a)=>a/255)\n  let v=Math.max(r,g,b), c=v-Math.min(r,g,b), f=(1-Math.abs(v+v-c-1)); \n  let h= c && ((v==r) ? (g-b)/c : ((v==g) ? 2+(b-r)/c : 4+(r-g)/c)); \n  return [60*(h<0?h+6:h), f ? c/f : 0, (v+v-c)/2];\n}\nfunction hsl2rgb(arr){\n  let h,s,l,r,g,b;[h,s,l]=arr;\n  let a=s*Math.min(l,1-l);\n  let f= (n,k=(n+h/30)%12) => l - a*Math.max(Math.min(k-3,9-k,1),-1);\n  return [f(0),f(8),f(4)].map((a)=>a*255);\n}\nreturn ((r,g,b,x,y)=>{\n  let hsl=rgb2hsl([r,g,b]);\n  hsl[0]=hsl[0]+hueRotate;\n  return hsl2rgb(hsl);\n})'}
+];
 let hexEncode=((a)=>{return a.split("").map((b)=>b.charCodeAt().toString(16).padStart(2,"0")).join("")}),hexDecode=((a)=>{return a.match(/.{1,2}/g).map((a)=>String.fromCharCode(parseInt(a,16))).join("")}),
 d=document,Q=(a)=>d.querySelectorAll(a),q=(a)=>Q(a)[0]
 Object.getOwnPropertyNames(Math).forEach((a)=>{window[a]=Math[a]})
@@ -52,3 +66,11 @@ if(location.hash.replace("#","")!=""){
 }
 updateEL();
 q("#refreshImgBtn").addEventListener("click",()=>{currentImage=createPlainImage();imgurl="";updateEL();});
+function loadExample(n){
+	q("#func").value=exampleScripts[n].tx;
+	q("#io").value=exampleScripts[n].rgb+1;
+	updateEL();
+}
+q("#loadExampleButton").addEventListener("click",()=>{
+	loadExample(parseInt(q('#exampleID').value));
+})
