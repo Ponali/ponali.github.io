@@ -210,9 +210,9 @@
 					for(i=0;i<text.length;i++){
 						if(Math.random()>=0.95){
 							let curBef=cur;
-							let lett=makeTypoLetter(text);
+							let lett=makeTypoLetter(text,i);
 							while (lett==text[i]){
-								lett=makeTypoLetter(text);
+								lett=makeTypoLetter(text,i);
 							}
 							cur+=lett;
 							elem.children[0].innerText=cur;
@@ -228,9 +228,21 @@
 					resolve('resolved');
 				});
 			};
-			function makeTypoLetter(a){
+			function makeTypoLetter(a,i){
+				let keyboard=["qwertyuiop","asdfghjkl;","<zxcvbnm,."];
 				let minch=a.split("").reduce((a,b)=>{return String.fromCharCode(Math.min((a+"").charCodeAt(),(b+"").charCodeAt()));}).charCodeAt();
 				let maxch=a.split("").reduce((a,b)=>{return String.fromCharCode(Math.max((a+"").charCodeAt(),(b+"").charCodeAt()));}).charCodeAt();
+				if(isLatin(a)){
+					let stri=keyboard.join("").indexOf(a[i]);
+					let x=stri%keyboard[0].length;
+					let y=Math.floor(stri/keyboard[0].length);
+					//console.log(stri,x,y)
+					if(Math.random()>0.5){x+=(Math.random()-0.5)*3}else{y+=(Math.random()-0.5)*3};
+					[x,y]=[x,y].map((a)=>Math.min(Math.max(Math.floor(a),0),keyboard[0].length-1));
+					return keyboard[y][x]
+				} else {
+					return ([...Array((maxch-minch)+1).keys()].map((a)=>{return String.fromCharCode(a+minch);}).join("")).random();
+				}
 				let b=("abcdefghijklmnopqrstuvwxyz *%@,;:§/"+([...Array((maxch-minch)+1).keys()].map((a)=>{return String.fromCharCode(a+minch);}).join(""))).split("/");
 				return b[(!isLatin(a))+0].random();
 			}
