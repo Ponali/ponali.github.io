@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NO MORE SEMICOLONS!!!!</title>
+</head>
+<body>
+    <h1>NO MORE SEMICOLONS!!!!</h1>
+    <p>This project is for demonstrational, educational and experimental purposes and aims to try removing semicolons or line breaks from javascript code, while still keeping the code run as usual.</p>
+    <div>
+        <input type="checkbox" id="debugCheck" name="debugCheck"></input><label for="debugCheck">Debug</label>
+    </div>
+    <div style="display:flex;flex-direction: column;align-items: center;">
+        <textarea id="inputText" style="width:60vw;height:10vh;margin-bottom:0.4rem;"></textarea>
+        <textarea id="outputText" style="width:60vw;height:10vh;" readonly></textarea>
+    </div>
+    <h2>How does it work?</h2>
+    <h3>Splitting instructions</h3>
+    <p>First off, the script tries to split every instruction by its semicolon, or newline. This may not be easy, because say, one of the instructions is a for loop, and there are multiple instructions inside of that for loop. just using <code>.split(";")</code> won't do, since the second instructions (and possibly the other instructions inside of that for loop) will be considered an instruction in the main program.</p>
+    <p>If there were to be a for loop, and with it, multiple instructions, the script will still output correctly, since the output of the function that splits the instructions is a tree, basically an array of splitted instructions that can have its own arrays, and those having their own arrays, etc.</p>
+    <h3>Tricks</h3>
+    <p>After splitting the instructions, we need some tricks for some semicolon removal before getting into the actual stuff. Take for example, how for loops work: <code>for(let i=0;i<10;i++){...}</code> has some semicolons, and there is no way to remove them...unless it gets converted into a while loops, since they don't have any semicolons.</p>
+    <p>Another thing is that using variables like "let" and "const" cannot be access outside of a function, so the solution is to turn every "var", "let" and "const" declaration to instead make a variable in <code>globalThis</code>. Because of that though, the script expects the given code to be valid; some invalid code may run anyway, because variables normally accessible will become accessible, even to the javascript console.</p>
+    <h3>Reconstructing instructions</h3>
+    <p>The last thing the script will do is to take all the instructions, edited by the tricks used, and reconstructs them without using semicolons. This is made by using an array, with a couple of functions, every function having one instruction. the array gets ran using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach"><code>forEach</code></a>, which is a prebuilt function that runs a given function for every element of an array. if that given function is to run that element of the array as a function, then it will run every function that is on the array. for stuff like for loops, however, the use of recursion (function calling itself) can be used to handle the situation.</p>
+    <p>Normally, the final result should look like <code>[()=>{...},()=>{...}].forEach(a=>a())</code>, and if there was a loop or if statement, it will look like <code>[()=>{for(...){[()=>{...},()=>{...}].forEach(a=>a())}}].forEach(a=>a())</code> because it's the result of recursion being used.</p>
+    <h2>Does the script have semicolons?</h2>
+    <p>Sadly, yes, though it would've been very interesting to pull this off. That's because there is no support for functions, and lots of other stuff, and doing this would not be sane.</p>
+    <h2>Hasn't this been already done by <a href="https://jsfuck.com/">JSFuck</a>?</h2>
+    <p>Yes, and no. The semicolons <i>do</i> get removed, though JSFuck cheats by making a string and evals it, everything constructed with their only 6 characters. This however, tries to directly edit the code rather to treat it as a string.</p>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+        html,body{
+            margin:0;
+            padding:0;
+            width:100%;
+            height:100%;
+            float:left;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #151530;
+            color: white;
+            font-family:"Open Sans", sans-serif;
+        }
+        h1{
+            margin-bottom:0;
+        }
+        p{
+            max-width:80vw;
+        }
+        a{
+            color:#0ff;
+        }
+    </style>
+    <script src="main.js"></script>
+    <script>
+        let d=document,Q=(a)=>d.querySelectorAll(a),q=(a)=>Q(a)[0];
+        function eventFunc(){
+            q("#outputText").value=removeSemicolons(q("#inputText").value,q("#debugCheck").checked);
+        }
+        q("#inputText").addEventListener("change",eventFunc);
+        q("#inputText").addEventListener("keydown",eventFunc);
+        q("#inputText").addEventListener("keyup",eventFunc);
+        q("#debugCheck").addEventListener("click",eventFunc);
+    </script>
+</body>
+</html>
