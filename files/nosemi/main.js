@@ -53,8 +53,7 @@ let func2let=((a)=>{
         a=a.replace("function ","");
         let funcname=a.slice(0,a.indexOf("("));
         let funcprop=a.slice(a.indexOf("("))+"=>";
-        console.log(funcprop)
-        return `let ${funcname}=${funcprop}`;
+        return `globalThis.${funcname}=${funcprop}`;
     })
     for(let i=0;i<a.length;i++){
         if(typeof(a[i])=="object"){
@@ -110,9 +109,10 @@ let for2while=((a)=>{
     };
     return a;
 });
-let unsemicolon=((a)=>{
+let unsemicolon=((a,b)=>{
     if(a.length==1&&typeof(a[0])!="object"){
-        return a[0].replaceAll(";","")
+        a=a[0].replaceAll(";","")
+        return (b?`()=>{${a}}`:a);
     }
     let out=[];
     for(let i=0;i<a.length;i++){
@@ -131,9 +131,40 @@ let unsemicolon=((a)=>{
         };
         out.push("()=>{"+removeSpacing(b)+"}")
     };
-    out=out.join(",");out=`[${out}].forEach(a=>a())`;
+    out=out.join(",");
+    if(!b){out=`[${out}].forEach(a=>a())`;}
     return out;
 });
+let returnFunction=((a)=>{
+    let varname=(()=>{
+        let varchs="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
+        return "__"+[...Array(8).keys()].map(()=>varchs[Math.floor(Math.random()*varchs.length)]).join("")
+    })
+    let rf=((a)=>{
+        if(!a.join(";").includes("return")){return a};
+        let vars=["a","b","c","d","e"];
+        vars=vars.map(varname);
+        let funcInstructions=`[${unsemicolon(windowify(func2let(a)),true)}]`;
+        let stack=[
+            `globalThis.${vars[1]}=null`,
+            `globalThis.${vars[2]}=true`,
+            `globalThis.${vars[3]}=null`,
+            `globalThis.${vars[4]}=(${vars[0]})=>{${unsemicolon(windowify(parseInstructions(`if(${vars[2]}){${vars[1]}=${vars[0]}();if(${vars[1]}){${vars[3]}=${vars[1]};${vars[2]}=!${vars[2]};};};`)))}}`,
+            `${funcInstructions}.forEach(${vars[4]});`
+        ];
+        return ["return "+unsemicolon(stack)+','+vars[3]];
+    });
+    for(let i=0;i<a.length;i++){
+        if(typeof(a[i])=="object"){
+            if(a[i][0].startsWith("function")){
+                a[i][1]=rf(a[i][1]);
+            } else {
+                a[i][1]=returnFunction(a[i][1]);
+            }
+        }
+    };
+    return a;
+})
 function removeSemicolons(a,debug){
     try{
         if(!(a.includes(";")||a.includes("\n"))){return a;};
@@ -141,7 +172,7 @@ function removeSemicolons(a,debug){
         let debugtext="parsed instructions: ";
         const parsed=parseInstructions(a);
         debugtext+=JSON.stringify(parsed);
-        let parseEdited=windowify(func2let(for2while(parsed)));
+        let parseEdited=func2let(returnFunction(windowify(for2while(parsed))));
         debugtext+="\nedited: "+JSON.stringify(parseEdited);
         return (debugtext+"\n\nfinal: ").repeat(debug)+unsemicolon(parseEdited);
     }catch (e){
