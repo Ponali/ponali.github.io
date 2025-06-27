@@ -2,40 +2,41 @@
 <html>
 	<head>
 		<title>presentation</title>
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
 	</head>
 	
 	<body class="load">
+		<div id="checkerboard-bg"></div>
 		<ul id="mainlist">
 			<li id="info-hi">
 				<img src="costume1.svg" />
 				<div class="content">
 					<h1>hi</h1>
-					<p>hi! i'm ponali and i'm a fellow french user who likes to experiment with software, make glitchart, and maybe waste my time a little. what you're seeing right now is a lil introduction i made with just the basic stuff you would need and prob jokes every now and then.</p>
+					<p>i'm ponali and i'm a coder that likes tech stuff, especially on software. i come from france and i'm bilingual, and to be honest, i think i know more english than french...<br>please note that i forget i have a website almost everytime, so there's probably a chance this got outdated (this website was updated <span id="website-update-time"></span> ago)</p>
 				</div>
 			</li>
 			<li id="info-why">
 				<div class="content">
-					<h1>what is this for?</h1>
-					<p>i made this website as a little presentation since i was actually trying to figure out what to do and found out that the old index.html file i had before was just missing some kind of personality. so i actually made this so there's atleast smth shown</p>
+					<h1>check out <a href="http://cnblue.sting.lt/">cerulean blue</a>!</h1>
+					<p>cerulean blue is a new team of amateur coders, and me and my friend Wahlolly are part of it. we've just started making projects, and we're only a group of 2-3 people. if you're a developper, you want to be a bug tester, or you just want to suggest features, make sure to check it out!</p>
 				</div>
-				<img src="costume2.svg" />
+				<img src="cerulean-blue.png" />
 			</li>
 			<li id="info-whatprog">
 				<img src="costume3.svg" />
 				<div class="content">
-					<h1>what <span style="color:#c0c0cc;">(programming language)</span> do i use to make my projects?</h1>
-					<p>it depends on what i work on, but generally i use html/css/js, python, rarely node.js, batch (or "windows command line"), and if i want to experiment with stuff i have <a href="https://esolangs.org/wiki/Brainfuck">brainfuck</a> (with <a href="https://github.com/elikaski/BF-it">BF-it</a>) on my side. i currently use github to publish my work.</p>
+					<h1>what <span class="title-small">(programming language)</span> do i use to make my projects?</h1>
+					<p>i'm a linux user, which is easier for development most of the time. i use <a href="https://lua.org/">lua</a> when necessary (<a href="https://ocdoc.cli.li">OpenComputers</a> and <a href="https://www.retrogadgets.game/">Retro Gadgets</a>), <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">bash</a> scripts if i want something quick or anything with my linux system i want to automate, <a href="https://nodejs.org/en">node.js</a> for more complex stuff, and <a href="https://python.org/">python</a> if node.js doesn't have the libraries i want. i publish my work on <a href="https://github.com/">github</a>, and all the tools i use are free and most likely open-source. i daily drive <a href="https://kubuntu.org/">kubuntu</a>, which is basically an ubuntu flavor with kde plasma and kde apps.</p>
 				</div>
 			</li>
 			<li id="info-contact">
 				<div class="content">
 					<h1>contact me</h1>
-					<p>if you want to ask me a question, go ahead, i'm free most of the time so once you ask me a question i should answer you in less than 2 days. you can also use some of the links to learn what i'm skilled at, especially the scratch one.<br>Scratch: <a href="https://scratch.mit.edu/users/Ponali">@Ponali</a> -- Discord: @ponali -- GitHub: <a href="https://github.com/Ponali">@Ponali</a></p>
+					<p>if there are any questions you'd like to hear from me, if you'd like to find out how one of my programs work, or if you just wanna get in touch with me, please contact me on discord. i never check my email, so this isn't listed here. <br>discord: <a href="discordapp.com/users/784775503222407168">@ponali</a> · github: <a href="https://github.com/Ponali">@Ponali</a> · <span style="text-decoration: line-through">scratch: <a href="https://scratch.mit.edu/users/Ponali">@Ponali</a></span></p>
 				</div>
 				<img src="costume4.svg" />
 			</li>
 		</ul>
-		<p id="repo">for a list of files present, go to the repo page <a href="https://github.com/Ponali/ponali.github.io">here</a>.</p>
 		<style>
 			@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 			@keyframes loadSpacing{
@@ -60,6 +61,21 @@
 					background-color:#00000000;
 				}
 			}
+			@keyframes checker{
+				from{
+					background-position:0 0;
+				}
+				to{
+					background-position:-6in -1.2in;
+				}
+			}
+			h1{
+				font-style: italic;
+			}
+			.title-small{
+				color:#c0c0cc;
+				font-size: 0.7em;
+			}
 			body{
 				width:100vw;
 				height:100vh;
@@ -69,7 +85,25 @@
 				float:left;
 				background-color:#151530;
 				overflow-x: hidden;
+				overflow-y: hidden;
 				transition:opacity 1s;
+			}
+			body #checkerboard-bg{
+				background: conic-gradient(
+					#15186680 90deg,
+					#202570 90deg 180deg,
+					#15186680 180deg 270deg,
+					#202570 270deg
+				);
+				background-size: 1.2in 1.2in;
+				background-repeat: repeat;
+				animation: checker 8s linear infinite;
+				width: 300vw;
+				height: 100vh;
+				position:absolute;
+				top:150vh;
+				left:-20vw;
+				transform: rotate(15deg);
 			}
 			body.load ul#mainlist, body.load p#repo{
 				display:none;
@@ -85,12 +119,16 @@
 				align-items: center;
 				animation: loadSpacing 4s infinite alternate ease-in-out;
 			}
+			body.load #checkerboard-bg{
+				display: none;
+			}
 			ul#mainlist{
 				list-style: none;
 				margin: 0;
 				width: 100%;
 				padding: 0;
 				height: 100%;
+				overflow-y: auto;
 			}
 			ul#mainlist li{
 				width: 100%;
@@ -124,7 +162,7 @@
 				overflow-y: auto;
 			}
 			div.content h1, p, body.load::after{
-				font-family:"Open Sans", sans-serif;
+				font-family: Hack, monospace;
 				color:white;
 				margin:0;
 			}
@@ -140,12 +178,6 @@
 				height:100%;
 				display:inline-block;
 				animation: cursor 500ms infinite alternate linear;
-			}
-			p#repo{
-				text-align: center;
-				position: absolute;
-				bottom: 10px;
-				width: 100%;
 			}
 			
 			::-webkit-scrollbar {
@@ -174,15 +206,16 @@
 			"".__proto__.random=function(){return this.split("").random()};
 			const delay = ms => new Promise(res => setTimeout(res, ms));
 			window.onload=(()=>{
-				document.querySelectorAll("a").forEach((a)=>{a.setAttribute("target","_blank")});
+				Q("a").forEach((a)=>{a.setAttribute("target","_blank")});
 				loadFinished();
 			});
 			function loadFinished(){
-				document.querySelectorAll("ul#mainlist li").forEach((a,b)=>{a.classList.add("hide");setTimeout(()=>{a.classList.remove("hide");if(b==0){welcomeAnim(a);};},750*(b+2));});
-				document.body.style.opacity="0";
+				q("span#website-update-time").innerText=Math.round((Date.now()-1751021094024)/1000/60/60/24)+" day(s)"
+				Q("ul#mainlist li").forEach((a,b)=>{a.classList.add("hide");setTimeout(()=>{a.classList.remove("hide");if(b==0){welcomeAnim(a);};},750*(b+2));});
+				d.body.style.opacity="0";
 				setTimeout(()=>{
-					document.body.classList.remove("load");
-					document.body.style.opacity="1";
+					d.body.classList.remove("load");
+					d.body.style.opacity="1";
 				},1000);
 			}
 			async function welcomeAnim(elem){
@@ -198,7 +231,7 @@
 					};
 					textLast.push(text);if(textLast.length>4){textLast=textLast.slice(-4);}
 					await type(elem.querySelector("h1"),text);
-					await delay(200+(Math.random()*300));
+					await delay(200+((Math.random()**1.5)*700));
 					elem.querySelector("h1 span#spantext").style.background="#00f"
 					await delay(100);
 				}
