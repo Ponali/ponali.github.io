@@ -12,13 +12,14 @@
 				<img src="costume1.svg" />
 				<div class="content">
 					<h1>hi</h1>
-					<p>i'm ponali and i'm a coder that likes tech stuff, especially on software. i come from france and i'm bilingual, and to be honest, i think i know more english than french...<br>please note that i forget i have a website almost everytime, so there's probably a chance this got outdated (this website was updated <span id="website-update-time"></span> ago)</p>
+					<p>i'm ponali and i'm a nerd that likes tinkering and making obscure software as a hobby. i live in france, but don't worry, i speak english very well. sometimes better than french for some reason.<br>just note that i almost always forget that this website exists, so this information might be outdated (this website was updated <span id="website-update-time"></span> ago)</p>
 				</div>
 			</li>
 			<li id="info-why">
 				<div class="content">
 					<h1>check out <a href="http://cnblue.sting.lt/">cerulean blue</a>!</h1>
-					<p>cerulean blue is a new team of amateur coders, and me and my friend Wahlolly are part of it. we've just started making projects, and we're only a group of 2-3 people. if you're a developper, you want to be a bug tester, or you just want to suggest features, make sure to check it out!</p>
+					<p>cerulean blue is a team of amateur coders, created back in September of 2024, and me and my friend Wah+ are part of it. we've just started making projects, even if we're still only a group of 2-3 people. if you're a developper, want to be a bug tester, or you just want to try and suggest features, make sure to check it out!</p>
+					<p>NOTE: this website only works under HTTP because of some issues with the domain provider of <i>sting.lt</i> and GitHub Pages. if your web browser tells you that this website is not secure, please ignore that. we still haven't got the gist of it.</p>
 				</div>
 				<img src="cerulean-blue.png" />
 			</li>
@@ -26,13 +27,14 @@
 				<img src="costume3.svg" />
 				<div class="content">
 					<h1>what <span class="title-small">(programming language)</span> do i use to make my projects?</h1>
-					<p>i'm a linux user, which is easier for development most of the time. i use <a href="https://lua.org/">lua</a> when necessary (<a href="https://ocdoc.cli.li">OpenComputers</a> and <a href="https://www.retrogadgets.game/">Retro Gadgets</a>), <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">bash</a> scripts if i want something quick or anything with my linux system i want to automate, <a href="https://nodejs.org/en">node.js</a> for more complex stuff, and <a href="https://python.org/">python</a> if node.js doesn't have the libraries i want. i publish my work on <a href="https://github.com/">github</a>, and all the tools i use are free and most likely open-source. i daily drive <a href="https://kubuntu.org/">kubuntu</a>, which is basically an ubuntu flavor with kde plasma and kde apps.</p>
+					<p>i'm a linux user, which makes development easier most of the time, and is generally faster than using modern windows. most of the tools i use (e.g. firefox, ffmpeg...) are <a href="https://en.wikipedia.org/wiki/Free_and_open-source_software">free and open-source</a>. i daily drive <a href="https://kubuntu.org/">kubuntu</a>, which is an Ubuntu flavor with <a href="https://kde.org/fr/plasma-desktop/">kde plasma</a> and kde apps. i publish my programming work on <a href="https://github.com/">github</a>.</p>
+					<p>i use <a href="https://lua.org/">lua</a> when necessary (e.g. <a href="https://oc.cil.li">OpenComputers</a> and <a href="https://www.retrogadgets.game/">Retro Gadgets</a>), <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">bash</a> scripts if i want something quick or automating my linux system, and <a href="https://nodejs.org/en">node.js</a> or <a href="https://python.org/">python</a> for more complex stuff. i only use HTML, CSS, and JS for web development.</p>
 				</div>
 			</li>
 			<li id="info-contact">
 				<div class="content">
 					<h1>contact me</h1>
-					<p>if there are any questions you'd like to hear from me, if you'd like to find out how one of my programs work, or if you just wanna get in touch with me, please contact me on discord. i never check my email, so this isn't listed here. <br>discord: <a href="discordapp.com/users/784775503222407168">@ponali</a> · github: <a href="https://github.com/Ponali">@Ponali</a> · <span style="text-decoration: line-through">scratch: <a href="https://scratch.mit.edu/users/Ponali">@Ponali</a></span></p>
+					<p>if there are any questions you'd like to hear from me, if you'd like to find out how one of my programs work, or if you just wanna get in touch with me, please contact me on discord, on matrix, or on mastodon. i never check my email, so this isn't listed here. <br>discord: <a href="discordapp.com/users/784775503222407168">@ponali</a> · github: <a href="https://github.com/Ponali">@Ponali</a> · youtube: <a href="https://www.youtube.com/@ponali-sw">@ponali-sw</a> · mastodon: <a href="https://mastodon.social/@ponali">@ponali@mastodon.social</a> · matrix: @ponali:matrix.org · xmpp: ponali@projectsegfau.lt</p>
 				</div>
 				<img src="costume4.svg" />
 			</li>
@@ -210,7 +212,8 @@
 				loadFinished();
 			});
 			function loadFinished(){
-				q("span#website-update-time").innerText=Math.round((Date.now()-1751021094024)/1000/60/60/24)+" day(s)"
+				let daysUpdated = Math.round((Date.now()-1751021094024)/1000/60/60/24)
+				q("span#website-update-time").innerText=daysUpdated+" day"+"s".repeat(daysUpdated!=1)
 				Q("ul#mainlist li").forEach((a,b)=>{a.classList.add("hide");setTimeout(()=>{a.classList.remove("hide");if(b==0){welcomeAnim(a);};},750*(b+2));});
 				d.body.style.opacity="0";
 				setTimeout(()=>{
@@ -221,7 +224,7 @@
 			async function welcomeAnim(elem){
 				//await delay(500);
 				let d=new Date();
-				let texts=("hi/hello/hey/welcome/coucou/bon"+(d.getHours()<=16?"jour":"soir")+"/welkommen/guten "+(d.getHours()<12?"morgen":(d.getHours()<18?"tag":"abend"))+"/hallo/\u3044\u3089\u3063\u3057\u3083\u3044\u307e\u305b/"+(d.getHours()<12?"\u304a\u306f\u3088\u3046":"\u3053\u3093"+(d.getHours()<18?"\u306b\u3061":"\u3070\u3093")+"\u306f")+"/\u03ba\u03b1\u03bb\u03c9\u03c3\u03cc\u03c1\u03b9\u03c3\u03bc\u03b1/"+(d.getHours()<12?"\u03ba\u03b1\u03bb\u03b7\u03bc\u03ad\u03c1\u03b1":"\u03ba\u03b1\u03bb\u03cc\x20\u03b1\u03c0\u03cc\u03b3\u03b5\u03c5\u03bc\u03b1")+"/sveiki/"+(d.getHours()<12?"labas rytas":(d.getHours()<18?"laba diena":"labas vakaras"))+"/ANANAS".repeat(Math.random()>=0.85)+"/kreisi".repeat(Math.random()>=0.85)+"/the fitness gram pacer test is a multistage aerobic capacity test that progressively gets more difficult as it continues".repeat(Math.random()>=0.85)+"/asajdsajddjajssdajajasjddasj".repeat(Math.random()>=0.85)+"/sample text".repeat(Math.random()>=0.85)+"/hei/szia/hallo/hej/kamusta").split("/");
+				let texts=("hi/hello/hey/welcome/coucou/bon"+(d.getHours()<=16?"jour":"soir")+"/welkommen/guten "+(d.getHours()<12?"morgen":(d.getHours()<18?"tag":"abend"))+"/hallo/\u3044\u3089\u3063\u3057\u3083\u3044\u307e\u305b/"+(d.getHours()<12?"\u304a\u306f\u3088\u3046":"\u3053\u3093"+(d.getHours()<18?"\u306b\u3061":"\u3070\u3093")+"\u306f")+"/\u03ba\u03b1\u03bb\u03c9\u03c3\u03cc\u03c1\u03b9\u03c3\u03bc\u03b1/"+(d.getHours()<12?"\u03ba\u03b1\u03bb\u03b7\u03bc\u03ad\u03c1\u03b1":"\u03ba\u03b1\u03bb\u03cc\x20\u03b1\u03c0\u03cc\u03b3\u03b5\u03c5\u03bc\u03b1")+"/sveiki/"+(d.getHours()<12?"labas rytas":(d.getHours()<18?"laba diena":"labas vakaras"))+"/ANANAS".repeat(Math.random()>=0.85)+"/kreisi".repeat(Math.random()>=0.85)+"/SERBIAAAAAAAAAAAAAAAAAAAAAAAAAAA SERBIAAAAAAAAAAAAAAAAAAAA SERBIAAAAAAAAAAAAAAAAAAAAAAAA".repeat(Math.random()>=0.85)+"/\u2562\u256f\u2567\u256f\u2573\u2520\u2562\u2569\u256e\u2574\u2565\u2564".repeat(Math.random()>=0.85)+"/\u043e\u0442\u043a\u0440\u044b\u0442\u044b\u0439 \u043a\u043e\u043c\u043f\u044c\u044e\u0442\u0435\u0440".repeat(Math.random()>=0.85)+"/hei/szia/hallo/hej/kamusta").split("/");
 				console.log(texts);
 				let text;
 				let textLast=[text];
@@ -243,9 +246,14 @@
 					for(i=0;i<text.length;i++){
 						if(Math.random()>=0.95){
 							let curBef=cur;
-							let lett=makeTypoLetter(text,i);
-							while (lett==text[i]){
+							let lett = "";
+							try{
 								lett=makeTypoLetter(text,i);
+								while (lett==text[i]){
+									lett=makeTypoLetter(text,i);
+								}
+							} catch {
+								lett = "¤";
 							}
 							cur+=lett;
 							elem.children[0].innerText=cur;
@@ -271,7 +279,8 @@
 					let y=Math.floor(stri/keyboard[0].length);
 					//console.log(stri,x,y)
 					if(Math.random()>0.5){x+=(Math.random()-0.5)*3}else{y+=(Math.random()-0.5)*3};
-					[x,y]=[x,y].map((a)=>Math.min(Math.max(Math.floor(a),0),keyboard[0].length-1));
+					x=Math.min(Math.max(Math.floor(x),0),keyboard[0].length-1)
+					y=Math.min(Math.max(Math.floor(y),0),keyboard.length-1)
 					return keyboard[y][x]
 				} else {
 					return ([...Array((maxch-minch)+1).keys()].map((a)=>{return String.fromCharCode(a+minch);}).join("")).random();
